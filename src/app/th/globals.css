@@ -1,0 +1,360 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ① Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=GFS+Didot&family=League+Spartan:wght@100..900&family=Playfair+Display:wght@400;600;700&display=swap");
+
+/* ② Define color variables */
+:root {
+  --background: #ffffffc4;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Hide scrollbar but allow scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+/* ③ Define local fonts */
+@font-face {
+  font-family: "NEXON Lv1 Gothic";
+  src: url("/font/NEXONLv1Gothic.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BrittanySignature";
+  src: url("/font/BrittanySignature.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BODAR";
+  src: url("/font/BODAR.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoSansThai";
+  src: url("/font/NotoSansThai.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBMPlexSansKR";
+  src: url("/font/IBMPlexSansKR-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CrayonCrumble";
+  src: url("/font/DkCrayonCrumble-ddll.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TypoCrayon";
+  src: url("/font/Typo_CrayonM.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PG_Bathbomb";
+  src: url("/font/PG_BathbombV3.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PG_Crayon";
+  src: url("/font/PG_Crayon.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ④ Default font stack for body & buttons */
+button,
+body {
+  font-family: "NotoSansThai", Arial, sans-serif;
+}
+
+/* ⑤ Class-based usage */
+.nexon-font {
+  font-family: "NotoSansThai", Arial, sans-serif;
+}
+
+.league-font {
+  font-family: "NotoSansThai", Arial, sans-serif;
+}
+
+.didot-font {
+  font-family: "NotoSansThai", Arial, sans-serif;
+}
+
+.brittany-font {
+  font-family: "NotoSansThai", Arial, sans-serif;
+}
+
+.bodar-font {
+  font-family: "BODAR", serif;
+}
+
+.ibmplex-font {
+  font-family: "NotoSansThai", Arial, sans-serif;
+}
+
+.crayon-font {
+  font-family: "NotoSansThai", Arial, sans-serif;
+}
+
+.typo-crayon-font {
+  font-family: "NotoSansThai", Arial, sans-serif;
+}
+
+.pg-bathbomb {
+  font-family: "NotoSansThai", Arial, sans-serif;
+}
+
+.pg-crayon {
+  font-family: "NotoSansThai", Arial, sans-serif;
+}
+
+/* General styling */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  height: 100%;
+  overflow: hidden;
+
+  background: #fdfaf6;
+  background-image:
+    radial-gradient(#00000006 1px, transparent 1px),
+    radial-gradient(#00000004 1px, transparent 1px);
+  background-size:
+    5px 5px,
+    7px 7px;
+}
+
+p {
+  line-height: 28px;
+}
+
+body {
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+/* Hide scrollbar but allow scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes revealChar {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-revealChar {
+  animation: revealChar 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease forwards;
+}
+
+.profile-photo-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  flex-shrink: 0;
+  perspective: 800px;
+  box-shadow: 0 10px 24px rgba(54, 42, 42, 0.12);
+}
+
+.profile-photo-flip {
+  position: absolute;
+  inset: 0;
+  animation: profilePhotoFlip 700ms ease;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+@keyframes profilePhotoFlip {
+  from {
+    opacity: 0.75;
+    transform: rotateY(90deg) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotateY(0) scale(1);
+  }
+}
+
+@layer components {
+  .title-en {
+    @apply crayon-font inline-block border-transparent;
+  }
+  .section {
+    @apply max-w-[420px] mx-auto mt-2 px-[6px];
+  }
+  .text-sm {
+    @apply font-medium;
+  }
+  .highlight {
+    @apply typo-crayon-font text-[#7a4f35] font-bold;
+  }
+}
+
+/* heart animation */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(45deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) rotate(45deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.heart-shape {
+  position: absolute;
+  bottom: -20px;
+  transform: rotate(45deg);
+  opacity: 0.8;
+  animation: floatUp linear forwards;
+  border-radius: 5px;
+}
+
+.heart-shape::before,
+.heart-shape::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.heart-shape::before {
+  top: -50%;
+  left: 0;
+}
+
+.heart-shape::after {
+  left: -50%;
+  top: 0;
+}
+
+@keyframes pageFade {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-pageFade {
+  animation: pageFade 0.45s ease forwards;
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.floating-flower {
+  position: absolute;
+  bottom: -40px;
+  animation: floatFlower linear forwards;
+}
+
+@keyframes floatFlower {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  70% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(-110vh) rotate(360deg) scale(1.1);
+    opacity: 0;
+  }
+}
