@@ -90,12 +90,12 @@ export default function WeddingInfoSection({
     {
       time: "7:09 AM",
       label: lang === "en" ? "Buddhist ceremony" : "พิธีสงฆ์",
-      icon: "/images/icon_monk.svg",
+      icon: "/images/icon_monk.png",
     },
     {
       time: "9:09 AM",
       label: lang === "en" ? "Khan Maak procession" : "พิธีแห่ขันหมาก",
-      icon: "/images/icon_khanmaak.svg",
+      icon: "/images/icon_khanmaak.png",
     },
     {
       time: "10:30 AM",
@@ -103,12 +103,12 @@ export default function WeddingInfoSection({
         lang === "en"
           ? "Water blessing ceremony"
           : "พิธีหลั่งน้ำพระพุทธมนต์",
-      icon: "/images/icon_water.svg",
+      icon: "/images/icon_water.png",
     },
     {
       time: "6:00 PM",
       label: lang === "en" ? "Wedding reception" : "พิธีฉลองมงคลสมรส",
-      icon: "/images/icon_reception.svg",
+      icon: "/images/icon_reception.png",
     },
     {
       time: "9:00 PM",
@@ -280,12 +280,14 @@ export default function WeddingInfoSection({
                   <span className="absolute left-1/2 top-9 h-[calc(100%+4px)] w-px -translate-x-1/2 bg-[#caa98e]" />
                 )}
                 <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#f7efe6] border border-[#d9bfa8] shadow-sm">
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={item.icon}
                     alt={item.label}
                     width={20}
                     height={20}
                     className="object-contain"
+                    style={{ background: "transparent" }}
                   />
                 </span>
               </span>

@@ -114,10 +114,25 @@ export default function InvitationSection({ lang }: Props) {
       )}
 
       {/* Parents */}
-      <div
-        className={`mt-6 text-center ${contentSize} leading-[1.8] text-[#333] flex flex-row items-start justify-center`}
-      >
-       
+      <div className={`mt-6 text-center leading-[1.9] text-[#5a3527] ${fontClass}`}>
+        <p className={`${subTextSize}`}>
+          🤵 {isTH ? "บุตรชายของ" : "Son of"}{" "}
+          <span className="font-semibold">{isTH ? "พ่อสุรชาติ" : "Mr. Surachart"}</span>
+          {" · "}
+          <span className="font-semibold">{isTH ? "แม่ศรีนวล" : "Mrs. Srinuan"}</span>
+        </p>
+        <p className={`text-[12px] text-[#8a6a5a]`}>
+          ({isTH ? "พ่อชาติ · แม่นวล" : "Dad Chat · Mom Nuan"})
+        </p>
+        <p className={`${subTextSize} mt-1`}>
+          👰 {isTH ? "บุตรสาวของ" : "Daughter of"}{" "}
+          <span className="font-semibold">{isTH ? "พ่อณัชพล" : "Mr. Natchaphon"}</span>
+          {" · "}
+          <span className="font-semibold">{isTH ? "แม่มะลิ" : "Mrs. Mali"}</span>
+        </p>
+        <p className={`text-[12px] text-[#8a6a5a]`}>
+          ({isTH ? "พ่อกด · แม่ลิ" : "Dad Kod · Mom Li"})
+        </p>
       </div>
       {/* Groom and bride */}
       <div className="flex flex-row items-start justify-center gap-3">
