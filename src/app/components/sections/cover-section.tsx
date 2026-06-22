@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SnowCanvas from "../snow-canvas";
 
 export default function CoverSection() {
   return (
@@ -13,6 +14,7 @@ export default function CoverSection() {
 
       <div className="absolute inset-0 z-10 bg-black/16" />
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/18 via-transparent to-black/20" />
+      <SnowCanvas />
 
       <div className="absolute left-1/2 top-[5.8%] z-20 w-full max-w-[420px] -translate-x-1/2 px-5">
         <div
