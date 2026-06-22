@@ -13,7 +13,7 @@ export const metadata = {
     siteName: "EVE&NUN Wedding Invitation",
     images: [
       {
-        url: "https://eve-nun.vercel.app/images/bg_updated_1 (1) (2).jpg",
+        url: "https://eve-nun.vercel.app/images/og_image.jpg",
         width: 800,
         height: 600,
         alt: "EVE&NUN Wedding Photo",
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         <meta
           property="og:image"
-          content="https://eve-nun.vercel.app/images/bg_updated_1 (1) (2).jpg"
+          content="https://eve-nun.vercel.app/images/og_image.jpg"
         />
         <meta property="og:url" content="https://eve-nun.vercel.app/" />
         <meta property="og:type" content="website" />
