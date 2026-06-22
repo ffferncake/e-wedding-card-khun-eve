@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <g stroke="#c8a27b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- ══ CONCH SHELL (สังข์) ══ -->
+    <!-- Main shell body outline - elongated oval, wider on left, tapering right into spire -->
+    <path d="M20 46 C18 36 24 24 36 20 C48 16 60 20 66 30 C70 38 68 48 62 53 C54 58 38 58 28 53 C22 50 20 48 20 46Z"/>
+    <!-- Spire - pointed tower extending upper-right -->
+    <path d="M64 28 C68 22 72 16 70 11 C68 7 64 9 62 14 C60 19 62 26 66 30"/>
+    <path d="M70 11 C73 8 74 12 72 16"/>
+    <!-- Shell ridges (curved horizontal lines across body) -->
+    <path d="M24 36 C36 30 54 30 66 36"/>
+    <path d="M22 42 C34 36 54 36 66 42"/>
+    <path d="M22 48 C34 44 54 44 64 50"/>
+    <!-- Aperture / lip on left side -->
+    <path d="M20 46 C16 50 16 56 22 58 C26 60 30 58 30 54"/>
+    <path d="M22 58 C20 62 22 65 26 64"/>
+
+    <!-- ══ PEDESTAL BOWL (พาน) ══ -->
+    <!-- Bowl body -->
+    <path d="M14 64 Q12 80 32 86 Q50 90 68 86 Q88 80 86 64"/>
+    <!-- Upper rim -->
+    <ellipse cx="50" cy="64" rx="36" ry="8"/>
+    <!-- Zigzag teeth below rim -->
+    <path d="M14 68 L17 74 L20 68 L23 74 L26 68 L29 74 L32 68 L35 74 L38 68 L41 74 L44 68 L47 74 L50 68 L53 74 L56 68 L59 74 L62 68 L65 74 L68 68 L71 74 L74 68 L77 74 L80 68 L83 74 L86 68"/>
+    <!-- Band below teeth -->
+    <path d="M14 74 Q50 77 86 74"/>
+    <!-- Stem -->
+    <path d="M40 86 L38 93"/>
+    <path d="M60 86 L62 93"/>
+    <!-- Base -->
+    <ellipse cx="50" cy="95" rx="16" ry="4"/>
+
+  </g>
+</svg>

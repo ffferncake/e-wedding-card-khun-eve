@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 
-// import FlowerBackground from "../components/flower-background";
+import FlowerBackground from "../components/flower-background";
 import EnvelopeOverlay from "../components/envelope-overlay";
 
 import CoverSection from "../components/sections/cover-section";
@@ -34,9 +34,9 @@ import {
 } from "lucide-react";
 import BottomNav from "../components/bottom-nav";
 import LoadingScreen from "../components/loading-screen";
-// import RsvpModal from "../components/rsvp-modal";
+import RsvpModal from "../components/rsvp-modal";
 import { useInvitationReady } from "../hooks/useInvitationReady";
-// import { useRsvpModalPrompt } from "../hooks/useRsvpModalPrompt";
+import { useRsvpModalPrompt } from "../hooks/useRsvpModalPrompt";
 
 /* ---------- nav items ---------- */
 const navItems = [
@@ -116,12 +116,12 @@ export default function WeddingInvitation() {
     useRef<HTMLDivElement>(null), // 8 Transport (Korea)
   ];
 
-  // const rsvpModal = useRsvpModalPrompt({
-  //   containerRef,
-  //   enabled: isReady,
-  //   lang: "th",
-  //   triggerRef: sectionRefs[3],
-  // });
+  const rsvpModal = useRsvpModalPrompt({
+    containerRef,
+    enabled: envelopeOpened,
+    lang: "th",
+    triggerRef: sectionRefs[3], // Gallery section
+  });
 
   /* ---------- scroll to section ---------- */
   const handleScrollTo = (navIndex: number) => {
@@ -159,18 +159,19 @@ export default function WeddingInvitation() {
         isVisible={isReady && !envelopeOpened}
         onOpen={() => setEnvelopeOpened(true)}
       />
-      {/* <RsvpModal
+      <RsvpModal
         lang="th"
         isOpen={rsvpModal.isOpen}
         doNotShowToday={rsvpModal.doNotShowToday}
         onDoNotShowTodayChange={rsvpModal.setDoNotShowToday}
         onClose={rsvpModal.closeModal}
-      /> */}
+      />
+      <FlowerBackground />
 
-      <div className="w-full h-screen flex justify-center bg-[rgba(153,153,153,0.05)]">
+      <div className="w-full h-screen flex justify-center bg-[#e8ddd2]">
         <div
           ref={containerRef}
-          className="relative w-full max-w-[420px] h-screen overflow-y-auto scrollbar-hide text-[#333] text-center leading-relaxed"
+          className="wedding-page relative w-full max-w-[420px] h-screen overflow-y-auto scrollbar-hide text-[#4f4038] text-center leading-relaxed"
         >
           {/* Cover */}
           <div ref={sectionRefs[0]} className="min-h-screen">

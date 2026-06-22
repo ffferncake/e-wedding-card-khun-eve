@@ -7,8 +7,7 @@ type Account = {
   bank: string;
   bankIcon: string;
   number: string;
-  role: string;
-  name?: string;
+  name: string;
 };
 
 export default function AccountSection({
@@ -19,9 +18,8 @@ export default function AccountSection({
   const accounts: Account[] = [
     {
       bank: lang === "en" ? "SCB" : "ไทยพาณิชย์ (SCB)",
-      bankIcon: "/images/scb_logo.svg",
+      bankIcon: "/images/scb_logo.jpeg",
       number: "163-221986-9",
-      role: lang === "en" ? "👰🏻‍♀️ Bride" : "👰🏻‍♀️ เจ้าสาว",
       name: lang === "en" ? "Anchalee Prabmalai" : "อัญชลี ปราบมะไลย",
     },
   ];
@@ -35,10 +33,7 @@ export default function AccountSection({
     );
   };
 
-  const isTH = lang === "th";
-
   const fontClass = "typo-crayon-font";
-  const sectionSize = "text-[13px]";
   const titleSize = "text-[16px]";
   const highlightSize = "text-[18px]";
   const subTextSize = "text-[14px]";
@@ -48,7 +43,7 @@ export default function AccountSection({
       <p className={`title-en ${fontClass} ${titleSize}`}>ACCOUNT</p>
 
       <h3 className={`highlight ${fontClass} ${highlightSize}`}>
-        {lang === "en" ? "Gift Details" : "ร่วมแสดงความยินดี"}
+        {lang === "en" ? "Wedding Gift" : "ช่องทางแสดงความยินดี"}
       </h3>
 
       <p className={`text-center ${fontClass} ${subTextSize}`}>
@@ -67,40 +62,46 @@ export default function AccountSection({
         )}
       </p>
 
-      <div className="flex flex-col gap-4 mt-3">
+      <div className="mt-4 flex flex-col gap-4">
         {accounts.map((acc, i) => (
-          <div key={i} className="flex flex-col items-center w-full">
-            <span
-              className={`${subTextSize} font-semibold mb-1 text-[#555] ${fontClass}`}
-            >
-              {acc.role}
-              {acc.name && <span> · {acc.name}</span>}
-            </span>
-
-            <div className="flex items-center justify-between gap-3 w-full bg-[#f7efe6] rounded-lg border border-[#d9bfa8] shadow-sm px-4 py-3">
-              <div className="flex items-center gap-2">
+          <div
+            key={i}
+            className="w-full rounded-lg border border-[#caa98e] bg-[#f4e9dc]/80 px-4 py-4 text-left shadow-[0_8px_20px_rgba(90,53,39,0.08)]"
+          >
+            <div className="flex items-start gap-3">
+              <div className="overflow-hidden rounded-md border border-[#d9bfa8] bg-white p-1">
                 <Image
                   src={acc.bankIcon}
                   alt={acc.bank}
-                  width={28}
-                  height={28}
-                  className="rounded"
+                  width={42}
+                  height={42}
+                  className="h-[42px] w-[42px] rounded-md object-cover"
                 />
-
-                <span
-                  className={`${subTextSize} font-medium text-[#333] ${fontClass}`}
-                >
-                  {acc.number}
-                </span>
               </div>
 
-              <button
-                onClick={() => copyAccount(acc.number)}
-                className={`flex items-center gap-1 bg-white border border-[#d9bfa8] px-3 py-1.5 text-xs rounded-md hover:bg-[#f2e4d5] transition text-[#7a4f35] ${fontClass}`}
-              >
-                {lang === "en" ? "Copy" : "คัดลอก"}
-                <Copy className="w-3.5 h-3.5" />
-              </button>
+              <div className={`min-w-0 flex-1 space-y-1.5 ${fontClass}`}>
+                <div className="flex items-baseline gap-2 text-[12px] leading-5">
+                  <span className="flex-shrink-0 text-[#8a6a5a]">{lang === "en" ? "Account name" : "ชื่อบัญชี"}</span>
+                  <span className="font-semibold text-[#4f4038] truncate">{acc.name}</span>
+                </div>
+                <div className="flex items-baseline gap-2 text-[12px] leading-5">
+                  <span className="flex-shrink-0 text-[#8a6a5a]">{lang === "en" ? "Bank" : "ธนาคาร"}</span>
+                  <span className="font-semibold text-[#4f4038] truncate">{acc.bank}</span>
+                </div>
+                <div className="flex items-center gap-2 text-[12px] leading-5">
+                  <span className="flex-shrink-0 text-[#8a6a5a]">{lang === "en" ? "Account number" : "เลขบัญชี"}</span>
+                  <span className="font-bold text-[#5a3527]">{acc.number}</span>
+                  <button
+                    type="button"
+                    onClick={() => copyAccount(acc.number)}
+                    title={lang === "en" ? "Copy account number" : "คัดลอกเลขบัญชี"}
+                    aria-label={lang === "en" ? "Copy account number" : "คัดลอกเลขบัญชี"}
+                    className="ml-auto flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md border border-[#caa98e] bg-[#fffaf5] text-[#7a4f35] transition hover:bg-[#ead8c7]"
+                  >
+                    <Copy className="h-3.5 w-3.5" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         ))}

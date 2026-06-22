@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="th">
       <body className="typo-crayon-font" suppressHydrationWarning>
         {children}
       </body>

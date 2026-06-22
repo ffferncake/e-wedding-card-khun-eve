@@ -6,6 +6,7 @@ type Options = {
   containerRef: RefObject<HTMLDivElement | null>;
   enabled: boolean;
   lang: "en" | "th";
+  openOnReady?: boolean;
   triggerRef?: RefObject<HTMLDivElement | null>;
 };
 
@@ -17,13 +18,14 @@ export function useRsvpModalPrompt({
   containerRef,
   enabled,
   lang,
+  openOnReady = false,
   triggerRef,
 }: Options) {
   const [isOpen, setIsOpen] = useState(false);
   const [doNotShowToday, setDoNotShowToday] = useState(false);
   const [hasTriggered, setHasTriggered] = useState(false);
 
-  const storageKey = `rsvp-modal-dismissed-${lang}`;
+  const storageKey = `rsvp-modal-dismissed-v2-${lang}`;
 
   useEffect(() => {
     if (!enabled || hasTriggered) return;
@@ -34,6 +36,15 @@ export function useRsvpModalPrompt({
     if (localStorage.getItem(storageKey) === getTodayKey()) {
       setHasTriggered(true);
       return;
+    }
+
+    if (openOnReady) {
+      const timer = window.setTimeout(() => {
+        setIsOpen(true);
+        setHasTriggered(true);
+      }, 450);
+
+      return () => window.clearTimeout(timer);
     }
 
     const handleScroll = () => {
@@ -55,7 +66,7 @@ export function useRsvpModalPrompt({
     return () => {
       container.removeEventListener("scroll", handleScroll);
     };
-  }, [containerRef, enabled, hasTriggered, storageKey, triggerRef]);
+  }, [containerRef, enabled, hasTriggered, openOnReady, storageKey, triggerRef]);
 
   useEffect(() => {
     if (!isOpen) return;

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 const flowerImages = Array.from(
   { length: 10 },
-  (_, i) => `images/flowers/flower-${i + 1}.png`,
+  (_, i) => `/images/flowers/flower-${i + 1}.png`,
 );
 
 export default function FlowerBackground() {
@@ -43,10 +43,10 @@ export default function FlowerBackground() {
 
       setTimeout(() => {
         flower.remove();
-      }, 7000);
+      }, 15000);
     };
 
-    const interval = setInterval(createFlower, 200);
+    const interval = setInterval(createFlower, 650);
 
     return () => clearInterval(interval);
   }, []);
@@ -54,7 +54,7 @@ export default function FlowerBackground() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 overflow-hidden pointer-events-none z-[999]"
+      className="fixed inset-0 overflow-hidden pointer-events-none z-40 opacity-60"
     />
   );
 }

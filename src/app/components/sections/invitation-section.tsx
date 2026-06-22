@@ -7,9 +7,8 @@ type Props = {
   lang: "en" | "th";
 };
 
-const groomImages = ["/images/groom.JPG"] as const;
-const brideImages = ["/images/bride.JPG"] as const;
-const profilePhotoSize = "h-[260px] w-[172px]";
+const groomImages = ["/images/groom_kid.JPG", "/images/groom.JPG"] as const;
+const brideImages = ["/images/bride_kid.JPG", "/images/bride.JPG"] as const;
 
 const couple = {
   groom: {
@@ -124,7 +123,7 @@ export default function InvitationSection({ lang }: Props) {
       <div className="flex flex-row items-start justify-center gap-3">
         {/* Groom */}
         <div className="flex flex-col items-center text-center">
-          <div className={`profile-photo-frame ${profilePhotoSize}`}>
+          <div className="relative h-[120px] w-[120px] rounded-full overflow-hidden flex-shrink-0 shadow-[0_6px_20px_rgba(54,42,42,0.18)] border-2 border-[#d9bfa8]">
             <div key={groomImage} className="profile-photo-flip">
               <Image
                 src={groomImage}
@@ -132,7 +131,7 @@ export default function InvitationSection({ lang }: Props) {
                 fill
                 priority
                 quality={75}
-                sizes="112px"
+                sizes="120px"
                 className="object-cover object-center"
               />
             </div>
@@ -159,16 +158,16 @@ export default function InvitationSection({ lang }: Props) {
 
         {/* Bride */}
         <div className="flex flex-col items-center text-center">
-          <div className={`profile-photo-frame ${profilePhotoSize}`}>
+          <div className="relative h-[120px] w-[120px] rounded-full overflow-hidden flex-shrink-0 shadow-[0_6px_20px_rgba(54,42,42,0.18)] border-2 border-[#d9bfa8]">
             <div key={brideImage} className="profile-photo-flip">
               <Image
                 src={brideImage}
-                alt="my img"
+                alt="bride img"
                 fill
                 priority
                 quality={75}
-                sizes="112px"
-                className="object-cover object-[center_35%]"
+                sizes="120px"
+                className="object-cover object-[center_20%]"
               />
             </div>
           </div>

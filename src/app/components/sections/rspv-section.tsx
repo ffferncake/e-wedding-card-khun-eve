@@ -131,7 +131,7 @@ export default function RSVPSection({ lang, compact = false }: Props) {
 
   return (
     <div className="section">
-      <p className="title-en text-[15px] text-center">R.S.V.P.</p>
+      <p className="title-en text-[15px] w-full text-center block">R.S.V.P.</p>
       <h3 className="highlight text-[18px] text-center mb-6">
         {isTH ? "ยืนยันการเข้าร่วม" : "Confirm Attendance"}
       </h3>

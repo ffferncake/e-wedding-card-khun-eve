@@ -1,7 +1,7 @@
 "use client";
 
 import { LucideIcon, Globe } from "lucide-react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 type NavItem = {
   icon: LucideIcon;
@@ -31,38 +31,38 @@ export default function BottomNav({ navItems, activeIndex, onClick }: Props) {
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[95%] max-w-[410px] z-50 flex flex-col gap-2">
       {/* 🌐 language switch */}
       <div className="flex justify-center">
-        <div className="flex items-center gap-1 px-3 py-1 rounded-full backdrop-blur-xl bg-white/70 border border-white/30 shadow-md text-xs">
-          <Globe size={14} className="text-gray-600" />
-
-          <button
-            onClick={() => handleLangChange("th")}
-            className={`px-2 py-[2px] rounded-full transition ${
-              lang === "th"
-                ? "bg-black text-white"
-                : "text-gray-500 hover:bg-white"
-            }`}
-          >
-            TH
-          </button>
+        <div className="flex items-center gap-1 rounded-full border border-[#caa98e]/70 bg-[#fffaf5]/85 px-3 py-1 text-xs shadow-md backdrop-blur-xl">
+          <Globe size={14} className="text-[#7a4f35]" />
 
           <button
             onClick={() => handleLangChange("en")}
             className={`px-2 py-[2px] rounded-full transition-all duration-200 ${
               lang === "en"
-                ? "bg-black text-white scale-105"
-                : "text-gray-500 hover:bg-white"
+                ? "bg-[#5a3527] text-white scale-105"
+                : "text-[#8a6a5a] hover:bg-[#f2e4d5]"
             }`}
           >
             EN
+          </button>
+
+          <button
+            onClick={() => handleLangChange("th")}
+            className={`px-2 py-[2px] rounded-full transition ${
+              lang === "th"
+                ? "bg-[#5a3527] text-white"
+                : "text-[#8a6a5a] hover:bg-[#f2e4d5]"
+            }`}
+          >
+            TH
           </button>
         </div>
       </div>
 
       {/* bottom nav */}
-      <div className="relative flex items-center backdrop-blur-xl bg-white/70 border border-white/30 rounded-full px-2 shadow-lg">
+      <div className="relative flex items-center rounded-full border border-[#caa98e]/70 bg-[#fffaf5]/85 px-2 shadow-lg backdrop-blur-xl">
         {/* active indicator */}
         <div
-          className="absolute top-1/2 -translate-y-1/2 h-[48px] bg-white rounded-full shadow-md transition-all duration-300"
+          className="absolute top-1/2 h-[48px] -translate-y-1/2 rounded-full bg-[#f2e4d5] shadow-md transition-all duration-300"
           style={{
             width: `calc((100% - 16px) / ${navItems.length})`,
             left: `calc(${activeIndex} * ((100% - 16px) / ${navItems.length}) + 8px)`,
@@ -80,14 +80,14 @@ export default function BottomNav({ navItems, activeIndex, onClick }: Props) {
             >
               <Icon
                 size={18}
-                className={isActive ? "text-black scale-105" : "text-gray-400"}
+                className={isActive ? "scale-105 text-[#5a3527]" : "text-[#a28a75]"}
               />
 
               <span
                 className={
                   isActive
-                    ? "text-[8px] text-black font-medium"
-                    : "text-[8px] text-gray-400"
+                    ? "text-[8px] font-medium text-[#5a3527]"
+                    : "text-[8px] text-[#a28a75]"
                 }
               >
                 {label}

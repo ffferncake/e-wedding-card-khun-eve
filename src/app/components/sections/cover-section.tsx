@@ -1,20 +1,50 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import SnowCanvas from "../snow-canvas";
+// import SnowCanvas from "../snow-canvas";
+
+const images = [
+  "/images/bg_updated_1.webp",
+  "/images/bg_updated_2.webp",
+  "/images/bg_updated_3.webp",
+];
 
 export default function CoverSection() {
+  const [current, setCurrent] = useState(0);
+
+  // Preload next image for smooth crossfade
+  useEffect(() => {
+    const nextIndex = (current + 1) % images.length;
+    const img = new window.Image();
+    img.src = images[nextIndex];
+  }, [current]);
+
+  // Auto-advance every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative h-screen overflow-hidden">
-      <Image
-        src="/images/bg_updated_1.webp"
-        alt="Wedding cover"
-        fill
-        priority
-        className="absolute inset-0 object-cover"
-      />
+      {images.map((src, i) => (
+        <Image
+          key={src}
+          src={src}
+          alt="Wedding cover"
+          fill
+          priority={i === 0}
+          className="absolute inset-0 object-cover transition-opacity duration-1000"
+          style={{ opacity: i === current ? 1 : 0 }}
+        />
+      ))}
 
       <div className="absolute inset-0 z-10 bg-black/16" />
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/18 via-transparent to-black/20" />
-      <SnowCanvas />
+      {/* <SnowCanvas /> */}
 
       <div className="absolute left-1/2 top-[5.8%] z-20 w-full max-w-[420px] -translate-x-1/2 px-5">
         <div

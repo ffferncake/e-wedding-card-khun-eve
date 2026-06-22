@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <g stroke="#c8a27b" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Outer teardrop / pointed container -->
+    <path d="M50 13 C68 22 78 40 74 57 Q68 73 50 73 Q32 73 26 57 C22 40 32 22 50 13Z"/>
+    <!-- Inner rim of bowl at bottom -->
+    <ellipse cx="50" cy="58" rx="18" ry="5"/>
+    <!-- Flower stems -->
+    <line x1="50" y1="28" x2="50" y2="53"/>
+    <line x1="42" y1="33" x2="42" y2="50"/>
+    <line x1="58" y1="33" x2="58" y2="50"/>
+    <!-- Flower heads -->
+    <circle cx="50" cy="25" r="4"/>
+    <circle cx="42" cy="30" r="3.5"/>
+    <circle cx="58" cy="30" r="3.5"/>
+    <!-- Pedestal -->
+    <path d="M43 73 L41 83"/>
+    <path d="M57 73 L59 83"/>
+    <path d="M35 83 Q50 87 65 83"/>
+  </g>
+</svg>

@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import WeddingCalendar from "../wedding-calendar";
+
+const locationImages = ["/images/location_1.jpg", "/images/location_2.jpg"];
 
 type Props = {
   lang: "en" | "th";
@@ -54,6 +57,15 @@ export default function WeddingInfoSection({
     onSelectVenue?.(venue);
   };
 
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % locationImages.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
   const [countdowns, setCountdowns] = useState<Record<VenueMode, TimeLeft>>({
     KOREA: emptyTimeLeft,
     THAILAND: emptyTimeLeft,
@@ -65,40 +77,43 @@ export default function WeddingInfoSection({
       lang === "en"
         ? "Saturday, December 19, 2026"
         : "วันเสาร์ ที่ 19 ธันวาคม 2569",
-    detail: lang === "en" ? "Vivace Bangpu" : "วิวาเช่ บางปู",
-    link: "https://maps.app.goo.gl/rD9xKZB4zacTuMTCA?g_st=il",
   };
 
   const dressCodeColors = [
-    { name: "Cream", color: "#f5ead8" },
+    { name: "Vanilla", color: "#f5ead8" },
     { name: "Light brown", color: "#c8a27b" },
     { name: "Chocolate", color: "#5a3527" },
-    { name: "Caramel", color: "#b46f33" },
+    { name: "Mocha", color: "#b46f33" },
   ];
 
   const ceremonyTimeline = [
     {
-      time: "07:09",
+      time: "7:09 AM",
       label: lang === "en" ? "Buddhist ceremony" : "พิธีสงฆ์",
+      icon: "/images/icon_monk.svg",
     },
     {
-      time: "09:09",
+      time: "9:09 AM",
       label: lang === "en" ? "Khan Maak procession" : "พิธีแห่ขันหมาก",
+      icon: "/images/icon_khanmaak.svg",
     },
     {
-      time: "10:30",
+      time: "10:30 AM",
       label:
         lang === "en"
           ? "Water blessing ceremony"
           : "พิธีหลั่งน้ำพระพุทธมนต์",
+      icon: "/images/icon_water.svg",
     },
     {
-      time: "18:00",
+      time: "6:00 PM",
       label: lang === "en" ? "Wedding reception" : "พิธีฉลองมงคลสมรส",
+      icon: "/images/icon_reception.svg",
     },
     {
-      time: "21:00",
+      time: "9:00 PM",
       label: "After Party",
+      icon: "/images/icon_discoball.svg",
     },
   ];
 
@@ -189,28 +204,40 @@ export default function WeddingInfoSection({
 
   return (
     <div id="weddinginfo" className={`section ${fontClass} ${sectionSize}`}>
-      <p className={`title-en ${fontClass} ${titleSize}`}>WEDDING HALL</p>
+      <p className={`title-en ${fontClass} ${titleSize}`}>WEDDING DETAILS</p>
 
       <h3 className={`highlight ${fontClass} ${highlightSize}`}>
-        {lang === "en" ? "Join Us on Our Special Day" : "ร่วมเฉลิมฉลองวันพิเศษของเรา"}
+        {lang === "en" ? "Our Wedding Day" : "รายละเอียดงานแต่งงาน"}
       </h3>
 
       <p className={`mt-2 text-[#8a6a5a] ${subTextSize} ${fontClass}`}>
         {lang === "en"
-          ? "We warmly invite you to celebrate with us"
-          : "เราขอเรียนเชิญทุกท่านมาร่วมเป็นสักขีพยาน"}
+          ? "A day of love, laughter, and celebration"
+          : "ร่วมฉลองความรักและความทรงจำดี ๆ ไปด้วยกัน"}
       </p>
 
-      <div className="mt-4 mb-[10px] rounded-lg border border-[#d9bfa8] bg-[#f7efe6]/55 px-4 py-4 text-center leading-[1.8] text-[#6b5548]">
-        <p className={`font-bold text-[#5a3527] ${hallNameSize} ${fontClass}`}>
-          {selectedInfo.name}
-        </p>
-        <p className={`mt-1 text-[#7a5a4a] font-medium ${subTextSize} ${fontClass}`}>
-          {selectedInfo.address}
-        </p>
-        <p className={`text-[#a28f85] text-[12px] ${fontClass}`}>
-          {lang === "en" ? "Samut Prakan, Thailand" : "สมุทรปราการ, ประเทศไทย"}
-        </p>
+      {/* Venue photo slideshow */}
+      <div className="relative mt-4 mb-[10px] w-full h-[220px] overflow-hidden rounded-xl shadow-md">
+        {locationImages.map((src, idx) => (
+          <Image
+            key={src}
+            src={src}
+            alt="Vivace Bangpu"
+            fill
+            className={`absolute inset-0 object-cover transition-opacity duration-[1500ms] ${
+              idx === currentImageIndex ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
+        {/* overlay label */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent px-4 py-3 text-left">
+          <p className={`font-bold text-white text-[15px] ${fontClass}`}>
+            {selectedInfo.name}
+          </p>
+          <p className={`text-white/80 text-[12px] ${fontClass}`}>
+            {selectedInfo.address}
+          </p>
+        </div>
       </div>
 
       {/* Dress code — no container, single row */}
@@ -234,7 +261,7 @@ export default function WeddingInfoSection({
         </div>
       </div>
 
-      <div className="mt-3 rounded-lg border border-[#d9bfa8] bg-[#f7efe6]/55 px-4 py-4 text-left">
+      <div className="mt-4 border-y border-[#caa98e] bg-transparent px-1 py-4 text-left">
         <p className={`${fontClass} ${subTextSize} font-semibold text-[#4f4038]`}>
           {lang === "en" ? "✦ Ceremony Timeline" : "✦ ลำดับพิธีการ"}
         </p>
@@ -242,16 +269,29 @@ export default function WeddingInfoSection({
           {ceremonyTimeline.map((item, index) => (
             <div
               key={`${item.time}-${item.label}`}
-              className="relative grid grid-cols-[54px_18px_1fr] items-start gap-2 pb-3 last:pb-0"
+              className="relative grid grid-cols-[64px_36px_1fr] items-start gap-2 pb-3 last:pb-0"
             >
-              <span className="font-semibold text-[#8a5a3b]">{item.time}</span>
-              <span className="relative flex h-6 justify-center">
+              {/* time */}
+              <span className={`font-semibold text-[11px] text-[#8a5a3b] pt-1 ${fontClass}`}>{item.time}</span>
+
+              {/* icon + line */}
+              <span className="relative flex flex-col items-center">
                 {index !== ceremonyTimeline.length - 1 && (
-                  <span className="absolute left-1/2 top-3 h-[calc(100%+12px)] w-px -translate-x-1/2 bg-[#caa98e]" />
+                  <span className="absolute left-1/2 top-9 h-[calc(100%+4px)] w-px -translate-x-1/2 bg-[#caa98e]" />
                 )}
-                <span className="relative z-10 mt-1 h-2.5 w-2.5 rounded-full border border-[#b98561] bg-[#8a5a3b]" />
+                <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#f7efe6] border border-[#d9bfa8] shadow-sm">
+                  <Image
+                    src={item.icon}
+                    alt={item.label}
+                    width={20}
+                    height={20}
+                    className="object-contain"
+                  />
+                </span>
               </span>
-              <span className="text-[#5f5048]">{item.label}</span>
+
+              {/* label */}
+              <span className={`text-[#5f5048] pt-1.5 text-[13px] ${fontClass}`}>{item.label}</span>
             </div>
           ))}
         </div>

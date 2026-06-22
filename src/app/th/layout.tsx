@@ -1,48 +1,41 @@
-import "./globals.css";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
 
+const OG_IMAGE = "https://eve-nun.vercel.app/images/og_image.jpg";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://eve-nun.vercel.app"),
-
   title: "EVE&NUN Wedding Invitation",
   description: "Saturday, December 19, 2026 at Vivace Bangpu.",
-
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
   },
-
   openGraph: {
     title: "EVE&NUN Wedding Invitation",
     description: "Saturday, December 19, 2026 at Vivace Bangpu.",
-    url: "https://eve-nun.vercel.app/",
+    url: "https://eve-nun.vercel.app/th",
     siteName: "EVE&NUN Wedding Invitation",
     images: [
       {
-        url: "/images/og_image.jpg",
+        url: OG_IMAGE,
+        secureUrl: OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "EVE&NUN Wedding Photo",
+        type: "image/jpeg",
       },
     ],
     type: "website",
   },
-
   twitter: {
     card: "summary_large_image",
     title: "EVE&NUN Wedding Invitation",
     description: "Saturday, December 19, 2026 at Vivace Bangpu.",
-    images: ["/images/og_image.jpg"],
+    images: [OG_IMAGE],
   },
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
-  return (
-    <html lang="ko">
-      <body className="typo-crayon-font" suppressHydrationWarning>
-        {children}
-      </body>
-    </html>
-  );
+export default function ThLayout({ children }: { children: ReactNode }) {
+  return <>{children}</>;
 }
