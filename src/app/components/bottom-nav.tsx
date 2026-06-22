@@ -17,9 +17,9 @@ type Props = {
 export default function BottomNav({ navItems, activeIndex, onClick }: Props) {
   const pathname = usePathname();
 
-  const lang: "ko" | "th" = pathname.startsWith("/th") ? "th" : "ko";
+  const lang: "en" | "th" = pathname.startsWith("/th") ? "th" : "en";
 
-  const handleLangChange = (target: "ko" | "th") => {
+  const handleLangChange = (target: "en" | "th") => {
     if (target === lang) return;
 
     localStorage.setItem("lang", target);
@@ -35,17 +35,6 @@ export default function BottomNav({ navItems, activeIndex, onClick }: Props) {
           <Globe size={14} className="text-gray-600" />
 
           <button
-            onClick={() => handleLangChange("ko")}
-            className={`px-2 py-[2px] rounded-full transition-all duration-200 ${
-              lang === "ko"
-                ? "bg-black text-white scale-105"
-                : "text-gray-500 hover:bg-white"
-            }`}
-          >
-            KR
-          </button>
-
-          <button
             onClick={() => handleLangChange("th")}
             className={`px-2 py-[2px] rounded-full transition ${
               lang === "th"
@@ -54,6 +43,17 @@ export default function BottomNav({ navItems, activeIndex, onClick }: Props) {
             }`}
           >
             TH
+          </button>
+
+          <button
+            onClick={() => handleLangChange("en")}
+            className={`px-2 py-[2px] rounded-full transition-all duration-200 ${
+              lang === "en"
+                ? "bg-black text-white scale-105"
+                : "text-gray-500 hover:bg-white"
+            }`}
+          >
+            EN
           </button>
         </div>
       </div>

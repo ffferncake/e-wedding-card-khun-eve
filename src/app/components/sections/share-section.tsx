@@ -3,21 +3,21 @@
 import { Share2 } from "lucide-react";
 
 type Props = {
-  lang: "ko" | "th";
+  lang: "en" | "th";
 };
 
 export default function ShareSection({ lang }: Props) {
   const isTH = lang === "th";
 
-  const fontClass = isTH ? "pg-bathbomb" : "typo-crayon-font";
-  const subTextSize = isTH ? "text-[18px]" : "text-[14px]";
+  const fontClass = "typo-crayon-font";
+  const subTextSize = "text-[14px]";
 
   const copyLink = () => {
     navigator.clipboard.writeText(window.location.href);
 
     alert(
-      lang === "ko"
-        ? "초대장 링크가 복사되었습니다 💌"
+      lang === "en"
+        ? "Invitation link copied 💌"
         : "คัดลอกลิงก์คำเชิญเรียบร้อยแล้ว 💌",
     );
   };
@@ -30,7 +30,7 @@ export default function ShareSection({ lang }: Props) {
       >
         <Share2 size={16} />
 
-        {lang === "ko" ? "초대장 링크 복사" : "คัดลอกลิงก์คำเชิญ"}
+        {lang === "en" ? "Copy invitation link" : "คัดลอกลิงก์คำเชิญ"}
       </button>
     </div>
   );

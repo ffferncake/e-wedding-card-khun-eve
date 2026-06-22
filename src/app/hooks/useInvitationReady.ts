@@ -1,25 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { behindSceneImages } from "../data/behind-scene";
 import { galleryImages } from "../data/gallery";
-
-const baseImageSources = [
-  "/images/bg_updated_1.webp",
-  "/images/bg_updated_2.webp",
-  "/images/hall_1.jpg",
-  "/images/hall_2.jpg",
-  "/images/hall_3.jpg",
-  "/images/mellow_1.jpg",
-  "/images/mellow_2.jpg",
-  "/images/mellow_3.jpg",
-  "/images/mellow_4.jpg",
-  "/images/gallery/hori_1.JPG",
-  "/images/gallery/hori_2.JPG",
-  "/images/oppa_kids_ver.png",
-  "/images/me_kids_ver.png",
-  "/images/jk_map.jpg",
-  "/images/icon/flowers.png",
-];
 
 function loadImage(src: string) {
   return new Promise<void>((resolve) => {
@@ -36,8 +19,8 @@ export function useInvitationReady() {
 
   const imageSources = useMemo(
     () => [
-      ...baseImageSources,
-      ...galleryImages.studio.slice(0, 4),
+      ...Object.values(galleryImages).flat().slice(0, 4),
+      ...behindSceneImages,
       ...Array.from(
         { length: 10 },
         (_, index) => `/images/flowers/flower-${index + 1}.png`,

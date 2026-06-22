@@ -6,8 +6,7 @@ import { useEffect } from "react";
 export default function LanguagePopup({ onClose }: { onClose: () => void }) {
   const router = useRouter();
 
-  const handleSelect = (lang: "th" | "ko") => {
-    // ✅ 언어 선택 저장 (핵심🔥)
+  const handleSelect = (lang: "th" | "en") => {
     localStorage.setItem("langSelected", "true");
     localStorage.setItem("lang", lang);
 
@@ -38,17 +37,17 @@ export default function LanguagePopup({ onClose }: { onClose: () => void }) {
 
         <div className="flex gap-3">
           <button
-            onClick={() => handleSelect("ko")}
-            className="flex-1 py-3 text-gray-500 rounded-xl bg-gray-100 hover:bg-gray-200 transition typo-crayon-font"
-          >
-            🇰🇷 한국어
-          </button>
-
-          <button
             onClick={() => handleSelect("th")}
             className="flex-1 py-3 text-gray-500 rounded-xl bg-gray-100 hover:bg-gray-200 transition pg-bathbomb"
           >
             🇹🇭 ไทย
+          </button>
+
+          <button
+            onClick={() => handleSelect("en")}
+            className="flex-1 py-3 text-gray-500 rounded-xl bg-gray-100 hover:bg-gray-200 transition typo-crayon-font"
+          >
+            🇬🇧 English
           </button>
         </div>
       </div>

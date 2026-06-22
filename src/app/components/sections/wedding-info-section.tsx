@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import WeddingCalendar from "../wedding-calendar";
 
 type Props = {
-  lang: "ko" | "th";
+  lang: "en" | "th";
   selectedVenue?: VenueMode;
   onSelectVenue?: (venue: VenueMode) => void;
 };
@@ -18,19 +17,6 @@ type TimeLeft = {
   seconds: string;
 };
 
-const hallImages = [
-  "/images/hall_1.jpg",
-  "/images/hall_2.jpg",
-  "/images/hall_3.jpg",
-];
-
-const mellowImages = [
-  "/images/mellow_1.jpg",
-  "/images/mellow_2.jpg",
-  "/images/mellow_3.jpg",
-  "/images/mellow_4.jpg",
-];
-
 const emptyTimeLeft: TimeLeft = {
   days: "00",
   hours: "00",
@@ -39,8 +25,8 @@ const emptyTimeLeft: TimeLeft = {
 };
 
 const countdownTargets = {
-  KOREA: new Date("2026-09-13T14:00:00+09:00"),
-  THAILAND: new Date("2026-12-26T18:00:00+07:00"),
+  KOREA: new Date("2026-12-19T18:00:00+07:00"),
+  THAILAND: new Date("2026-12-19T18:00:00+07:00"),
 };
 
 export default function WeddingInfoSection({
@@ -50,77 +36,71 @@ export default function WeddingInfoSection({
 }: Props) {
   const isTH = lang === "th";
 
-  const fontClass = isTH ? "pg-bathbomb" : "typo-crayon-font";
-  const sectionSize = isTH ? "text-[20px]" : "text-[13px]";
-  const titleSize = isTH ? "text-[22px]" : "text-[16px]";
-  const highlightSize = isTH ? "text-[24px]" : "text-[18px]";
+  const fontClass = "typo-crayon-font";
+  const sectionSize = "text-[13px]";
+  const titleSize = "text-[16px]";
+  const highlightSize = "text-[18px]";
 
-  const hallNameSize = isTH ? "text-[23px]" : "text-[18px]";
-  const subTextSize = isTH ? "text-[18px]" : "text-[14px]";
-  const countNumberSize = isTH ? "text-[18px]" : "text-[16px]";
-  const countLabelSize = isTH ? "text-[13px]" : "text-[11px]";
+  const hallNameSize = "text-[18px]";
+  const subTextSize = "text-[14px]";
+  const countNumberSize = "text-[16px]";
+  const countLabelSize = "text-[11px]";
 
   const [internalSelectedVenue, setInternalSelectedVenue] =
-    useState<VenueMode>("KOREA");
+    useState<VenueMode>("THAILAND");
   const selectedVenue = controlledSelectedVenue ?? internalSelectedVenue;
   const setSelectedVenue = (venue: VenueMode) => {
     setInternalSelectedVenue(venue);
     onSelectVenue?.(venue);
   };
-  const [currentPreviewIndex, setCurrentPreviewIndex] = useState(0);
 
   const [countdowns, setCountdowns] = useState<Record<VenueMode, TimeLeft>>({
     KOREA: emptyTimeLeft,
     THAILAND: emptyTimeLeft,
   });
 
-  const previewImages = selectedVenue === "KOREA" ? hallImages : mellowImages;
-  const selectedInfo =
-    selectedVenue === "KOREA"
-      ? {
-          label: lang === "ko" ? "한국 결혼식" : "พิธีแต่งงานที่เกาหลี",
-          name:
-            lang === "ko"
-              ? "JK Art Convention (JK아트컨벤션)"
-              : "JK Art Convention",
-          address:
-            lang === "ko"
-              ? "4층 Amberluce Hall (엠버루체홀)"
-              : "ชั้น 4 Amberluce Hall",
-          detail:
-            lang === "ko"
-              ? "서울특별시 영등포구 문래로 164"
-              : "164 Mullae-ro, Yeongdeungpo-gu, Seoul",
-          link: "http://www.jkart.co.kr/wedding/amberluce/",
-        }
-      : {
-          label:
-            lang === "ko"
-              ? "태국 축하 파티 & After Party"
-              : "งานฉลองที่ไทย & After Party",
-          name: "Mellow Garden Wine & Dine Restaurant",
-          address:
-            lang === "ko"
-              ? "10/895 Prasert-Manukitch Rd, Soi 33"
-              : "10/895 ถนนประเสริฐมนูญกิจ ซอย 33",
-          detail:
-            lang === "ko"
-              ? "Nuanchan, Bueng Kum, Bangkok 10230"
-              : "แขวงนวลจันทร์ เขตบึงกุ่ม กรุงเทพฯ 10230",
-          link: "https://www.facebook.com/MellowGardenWineDineRestaurant",
-        };
+  const selectedInfo = {
+    name: lang === "en" ? "Vivace Bangpu" : "วิวาเช่ บางปู",
+    address:
+      lang === "en"
+        ? "Saturday, December 19, 2026"
+        : "วันเสาร์ ที่ 19 ธันวาคม 2569",
+    detail: lang === "en" ? "Vivace Bangpu" : "วิวาเช่ บางปู",
+    link: "https://maps.app.goo.gl/rD9xKZB4zacTuMTCA?g_st=il",
+  };
 
-  // slideshow
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentPreviewIndex((prev) => (prev + 1) % previewImages.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, [previewImages.length]);
+  const dressCodeColors = [
+    { name: "Cream", color: "#f5ead8" },
+    { name: "Light brown", color: "#c8a27b" },
+    { name: "Chocolate", color: "#5a3527" },
+    { name: "Caramel", color: "#b46f33" },
+  ];
 
-  useEffect(() => {
-    setCurrentPreviewIndex(0);
-  }, [selectedVenue]);
+  const ceremonyTimeline = [
+    {
+      time: "07:09",
+      label: lang === "en" ? "Buddhist ceremony" : "พิธีสงฆ์",
+    },
+    {
+      time: "09:09",
+      label: lang === "en" ? "Khan Maak procession" : "พิธีแห่ขันหมาก",
+    },
+    {
+      time: "10:30",
+      label:
+        lang === "en"
+          ? "Water blessing ceremony"
+          : "พิธีหลั่งน้ำพระพุทธมนต์",
+    },
+    {
+      time: "18:00",
+      label: lang === "en" ? "Wedding reception" : "พิธีฉลองมงคลสมรส",
+    },
+    {
+      time: "21:00",
+      label: "After Party",
+    },
+  ];
 
   // countdown
   useEffect(() => {
@@ -163,13 +143,8 @@ export default function WeddingInfoSection({
 
   const countdownCards = [
     {
-      venue: "KOREA" as const,
-      title: lang === "ko" ? "🇰🇷 Korea" : "🇰🇷 Korea",
-      time: countdowns.KOREA,
-    },
-    {
       venue: "THAILAND" as const,
-      title: lang === "ko" ? "🇹🇭 Thailand" : "🇹🇭 Thailand",
+      title: lang === "en" ? "Wedding Day" : "วันแต่งงาน",
       time: countdowns.THAILAND,
     },
   ];
@@ -177,21 +152,17 @@ export default function WeddingInfoSection({
   const renderCountdown = (item: (typeof countdownCards)[number]) => {
     const isSelected = selectedVenue === item.venue;
     const values = [
-      { value: item.time.days, label: lang === "ko" ? "일" : "วัน" },
-      { value: item.time.hours, label: lang === "ko" ? "시간" : "ชม." },
-      { value: item.time.minutes, label: lang === "ko" ? "분" : "นาที" },
-      { value: item.time.seconds, label: lang === "ko" ? "초" : "วิ" },
+      { value: item.time.days, label: lang === "en" ? "Days" : "วัน" },
+      { value: item.time.hours, label: lang === "en" ? "Hours" : "ชม." },
+      { value: item.time.minutes, label: lang === "en" ? "Min" : "นาที" },
+      { value: item.time.seconds, label: lang === "en" ? "Sec" : "วิ" },
     ];
 
     return (
       <button
         key={item.venue}
         onClick={() => setSelectedVenue(item.venue)}
-        className={`${fontClass} rounded-lg border px-2 py-3 transition ${
-          isSelected
-            ? "border-[#f4c5c5] bg-white shadow-md ring-2 ring-[#f4c5c5]/40"
-            : "border-[#eadedf] bg-white/70"
-        }`}
+        className={`${fontClass} rounded-lg border border-[#d9bfa8] bg-[#f7efe6]/55 px-2 py-3 transition`}
       >
         <p className={`${fontClass} ${subTextSize} font-semibold text-[#444]`}>
           {item.title}
@@ -200,7 +171,7 @@ export default function WeddingInfoSection({
           {values.map((value) => (
             <div key={value.label} className={`${fontClass} text-center`}>
               <div
-                className={`${fontClass} rounded-md bg-[#f3f3f3] px-1 py-1 font-bold shadow-sm ${countNumberSize}`}
+                className={`${fontClass} rounded-md bg-[#efe0d0] px-1 py-1 font-bold text-[#4f4038] ${countNumberSize}`}
               >
                 {value.value}
               </div>
@@ -221,63 +192,69 @@ export default function WeddingInfoSection({
       <p className={`title-en ${fontClass} ${titleSize}`}>WEDDING HALL</p>
 
       <h3 className={`highlight ${fontClass} ${highlightSize}`}>
-        {lang === "ko" ? "예식 안내" : "รายละเอียดสถานที่จัดงาน"}
+        {lang === "en" ? "Join Us on Our Special Day" : "ร่วมเฉลิมฉลองวันพิเศษของเรา"}
       </h3>
 
-      <div className="flex justify-center gap-2 mb-4 mt-4">
-        <button
-          onClick={() => setSelectedVenue("KOREA")}
-          className={`px-[14px] py-[6px] rounded-full border ${subTextSize} transition ${fontClass} ${
-            selectedVenue === "KOREA"
-              ? "bg-[#111] text-white"
-              : "bg-white text-black border-[#ddd]"
-          }`}
-        >
-          {lang === "ko" ? "한국 결혼식" : "งานแต่งที่เกาหลี"}
-        </button>
+      <p className={`mt-2 text-[#8a6a5a] ${subTextSize} ${fontClass}`}>
+        {lang === "en"
+          ? "We warmly invite you to celebrate with us"
+          : "เราขอเรียนเชิญทุกท่านมาร่วมเป็นสักขีพยาน"}
+      </p>
 
-        <button
-          onClick={() => setSelectedVenue("THAILAND")}
-          className={`px-[14px] py-[6px] rounded-full border ${subTextSize} transition ${fontClass} ${
-            selectedVenue === "THAILAND"
-              ? "bg-[#111] text-white"
-              : "bg-white text-black border-[#ddd]"
-          }`}
-        >
-          {lang === "ko"
-            ? "태국 축하 파티 & After Party"
-            : "งานฉลองที่ไทย & After Party"}
-        </button>
-      </div>
-
-      <div className="text-center text-[13px] leading-[1.8] mb-[10px]">
-        <p className={`text-[#8DBEE1] ${subTextSize}`}>
-          {selectedInfo.label}
-        </p>
-        <p className={`font-semibold ${hallNameSize}`}>
+      <div className="mt-4 mb-[10px] rounded-lg border border-[#d9bfa8] bg-[#f7efe6]/55 px-4 py-4 text-center leading-[1.8] text-[#6b5548]">
+        <p className={`font-bold text-[#5a3527] ${hallNameSize} ${fontClass}`}>
           {selectedInfo.name}
         </p>
-
-        <p className={`text-[#888] ${subTextSize}`}>{selectedInfo.address}</p>
-        <p className={`text-[#888] ${subTextSize}`}>{selectedInfo.detail}</p>
+        <p className={`mt-1 text-[#7a5a4a] font-medium ${subTextSize} ${fontClass}`}>
+          {selectedInfo.address}
+        </p>
+        <p className={`text-[#a28f85] text-[12px] ${fontClass}`}>
+          {lang === "en" ? "Samut Prakan, Thailand" : "สมุทรปราการ, ประเทศไทย"}
+        </p>
       </div>
 
-      {/* slideshow */}
-      <div className="relative w-full h-[220px] overflow-hidden rounded-lg cursor-pointer">
-        {previewImages.map((src, idx) => (
-          <Image
-            key={src}
-            src={src}
-            alt={selectedInfo.name}
-            fill
-            className={`absolute inset-0 object-cover transition-opacity duration-[1600ms] ${
-              idx === currentPreviewIndex ? "opacity-100" : "opacity-0"
-            }`}
-            onClick={() =>
-              window.open(selectedInfo.link, "_blank", "noopener,noreferrer")
-            }
-          />
-        ))}
+      {/* Dress code — no container, single row */}
+      <div className="mt-4 text-left">
+        <p className={`${fontClass} text-[12px] font-semibold text-[#7a4f35] mb-2`}>
+          {lang === "en" ? "✦ Dress Code" : "✦ ธีมสีงานแต่ง"}
+        </p>
+        <div className="flex flex-nowrap justify-between items-center gap-1.5 overflow-x-auto pb-1">
+          {dressCodeColors.map((item) => (
+            <div
+              key={item.name}
+              className="flex flex-shrink-0 items-center gap-1 rounded-full border border-[#d8baa2] bg-[#f2e4d5]/80 px-2 py-0.5"
+            >
+              <span
+                className="h-3.5 w-3.5 rounded-full border border-white shadow-sm flex-shrink-0"
+                style={{ backgroundColor: item.color }}
+              />
+              <span className="text-[10px] text-[#5c4a40] whitespace-nowrap">{item.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-3 rounded-lg border border-[#d9bfa8] bg-[#f7efe6]/55 px-4 py-4 text-left">
+        <p className={`${fontClass} ${subTextSize} font-semibold text-[#4f4038]`}>
+          {lang === "en" ? "✦ Ceremony Timeline" : "✦ ลำดับพิธีการ"}
+        </p>
+        <div className="relative mt-3 space-y-0">
+          {ceremonyTimeline.map((item, index) => (
+            <div
+              key={`${item.time}-${item.label}`}
+              className="relative grid grid-cols-[54px_18px_1fr] items-start gap-2 pb-3 last:pb-0"
+            >
+              <span className="font-semibold text-[#8a5a3b]">{item.time}</span>
+              <span className="relative flex h-6 justify-center">
+                {index !== ceremonyTimeline.length - 1 && (
+                  <span className="absolute left-1/2 top-3 h-[calc(100%+12px)] w-px -translate-x-1/2 bg-[#caa98e]" />
+                )}
+                <span className="relative z-10 mt-1 h-2.5 w-2.5 rounded-full border border-[#b98561] bg-[#8a5a3b]" />
+              </span>
+              <span className="text-[#5f5048]">{item.label}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <WeddingCalendar
@@ -287,7 +264,7 @@ export default function WeddingInfoSection({
       />
 
       {/* countdown */}
-      <div className="mt-4 grid grid-cols-2 gap-2">
+      <div className="mt-4 grid grid-cols-1 gap-2">
         {countdownCards.map(renderCountdown)}
       </div>
     </div>

@@ -1,7 +1,6 @@
 import { readdir, writeFile } from "fs/promises";
 import path from "path";
 
-const galleryTabs = ["studio", "summer", "winter"];
 const galleryRoot = path.join(process.cwd(), "public", "images", "gallery");
 const outputFile = path.join(process.cwd(), "src", "app", "data", "gallery.ts");
 
@@ -16,20 +15,31 @@ function sortByImageNumber(a, b) {
   return aNumber - bNumber;
 }
 
-const entries = await Promise.all(
-  galleryTabs.map(async (tab) => {
-    const folder = path.join(galleryRoot, tab);
-    const files = await readdir(folder);
-    const images = files
-      .filter((file) => /\.(jpe?g|png|webp)$/i.test(file))
-      .sort(sortByImageNumber)
-      .map((file) => `/images/gallery/${tab}/${file}`);
+async function collectImages(folder, publicBase) {
+  const entries = await readdir(folder, { withFileTypes: true });
+  const files = await Promise.all(
+    entries.map(async (entry) => {
+      const fullPath = path.join(folder, entry.name);
+      const publicPath = `${publicBase}/${entry.name}`;
 
-    return [tab, images];
-  }),
-);
+      if (entry.isDirectory()) {
+        return collectImages(fullPath, publicPath);
+      }
 
-const gallery = Object.fromEntries(entries);
+      if (!entry.isFile() || !/\.(jpe?g|png|webp)$/i.test(entry.name)) {
+        return [];
+      }
+
+      return [publicPath];
+    }),
+  );
+
+  return files.flat().sort(sortByImageNumber);
+}
+
+const gallery = {
+  all: await collectImages(galleryRoot, "/images/gallery"),
+};
 
 await writeFile(
   outputFile,

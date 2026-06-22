@@ -1,52 +1,9 @@
 export const galleryImages = {
-  "studio": [
-    "/images/gallery/studio/1.JPG",
-    "/images/gallery/studio/2.JPG",
-    "/images/gallery/studio/3.JPG",
-    "/images/gallery/studio/4.JPG",
-    "/images/gallery/studio/5.JPG",
-    "/images/gallery/studio/6.JPG",
-    "/images/gallery/studio/7.JPG",
-    "/images/gallery/studio/8.JPG",
-    "/images/gallery/studio/9.JPG",
-    "/images/gallery/studio/10.JPG",
-    "/images/gallery/studio/11.JPG",
-    "/images/gallery/studio/12.JPG",
-    "/images/gallery/studio/13.JPG",
-    "/images/gallery/studio/14.JPG",
-    "/images/gallery/studio/15.JPG",
-    "/images/gallery/studio/16.JPG",
-    "/images/gallery/studio/17.JPG",
-    "/images/gallery/studio/18.JPG",
-    "/images/gallery/studio/19.JPG",
-    "/images/gallery/studio/20.JPG"
-  ],
-  "summer": [
-    "/images/gallery/summer/1.JPG",
-    "/images/gallery/summer/2.JPG",
-    "/images/gallery/summer/3.JPG",
-    "/images/gallery/summer/4.JPG",
-    "/images/gallery/summer/5.JPG",
-    "/images/gallery/summer/6.JPG",
-    "/images/gallery/summer/7.JPG",
-    "/images/gallery/summer/8.JPG",
-    "/images/gallery/summer/9.JPG",
-    "/images/gallery/summer/10.JPG",
-    "/images/gallery/summer/11.JPG",
-    "/images/gallery/summer/12.JPG"
-  ],
-  "winter": [
-    "/images/gallery/winter/1.JPG",
-    "/images/gallery/winter/2.JPG",
-    "/images/gallery/winter/3.JPG",
-    "/images/gallery/winter/4.JPG",
-    "/images/gallery/winter/5.JPG",
-    "/images/gallery/winter/6.JPG",
-    "/images/gallery/winter/7.JPG",
-    "/images/gallery/winter/8.JPG",
-    "/images/gallery/winter/9.JPG",
-    "/images/gallery/winter/10.JPG",
-    "/images/gallery/winter/11.JPG",
-    "/images/gallery/winter/12.JPG"
+  "all": [
+    "/images/gallery/DSC02764.JPG",
+    "/images/gallery/DSC02895.JPG",
+    "/images/gallery/DSC03432 2.JPG",
+    "/images/gallery/DSC03856 2.JPG",
+    "/images/gallery/DSC03870.JPG"
   ]
 } as const;

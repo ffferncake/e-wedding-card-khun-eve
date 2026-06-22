@@ -5,7 +5,7 @@ import { type RefObject, useEffect, useState } from "react";
 type Options = {
   containerRef: RefObject<HTMLDivElement | null>;
   enabled: boolean;
-  lang: "ko" | "th";
+  lang: "en" | "th";
   triggerRef?: RefObject<HTMLDivElement | null>;
 };
 

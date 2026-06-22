@@ -4,14 +4,12 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
-import HeartsBackground from "./components/hearts-background";
-import FlowerBackground from "./components/flower-background";
-import LanguagePopup from "./components/language-popup";
-
+import EnvelopeOverlay from "./components/envelope-overlay";
 import CoverSection from "./components/sections/cover-section";
 import InvitationSection from "./components/sections/invitation-section";
 import WeddingInfoSection from "./components/sections/wedding-info-section";
 import GallerySection from "./components/sections/gallery-section";
+import BehindSceneSection from "./components/sections/behind-scene-section";
 import AccountSection from "./components/sections/account-section";
 import LocationSection from "./components/sections/location-section";
 import SubwaySection from "./components/sections/subway-section";
@@ -31,23 +29,30 @@ import {
   Bus,
   Music4,
   VolumeOff,
+  ClipboardList,
 } from "lucide-react";
 import BottomNav from "./components/bottom-nav";
 import LoadingScreen from "./components/loading-screen";
-import RsvpModal from "./components/rsvp-modal";
+// import RsvpModal from "./components/rsvp-modal";
 import { useInvitationReady } from "./hooks/useInvitationReady";
-import { useRsvpModalPrompt } from "./hooks/useRsvpModalPrompt";
+// import { useRsvpModalPrompt } from "./hooks/useRsvpModalPrompt";
 
 /* ---------- nav items ---------- */
 const navItems = [
-  { icon: Heart, label: "소개" },
-  { icon: Mail, label: "초대장" },
-  { icon: Calendar, label: "일정" },
-  { icon: ImageIcon, label: "갤러리" },
-  { icon: Gift, label: "마음전하기" },
-  { icon: MapPin, label: "오시는길" },
-  { icon: Bus, label: "교통안내" },
+  { icon: Heart, label: "Home" },
+  { icon: Mail, label: "Invitation" },
+  { icon: Calendar, label: "Schedule" },
+  { icon: ImageIcon, label: "Gallery" },
+  { icon: Gift, label: "Gift" },
+  { icon: MapPin, label: "Location" },
+  { icon: ClipboardList, label: "RSVP" },
+  { icon: Bus, label: "Transport" },
 ];
+
+// Maps nav index → sectionRefs index (Behind section is ref[4] but not in nav)
+const navScrollTargets = [0, 1, 2, 3, 5, 6, 7, 8];
+// Maps sectionRefs index → nav index (-1 = not in nav)
+const sectionToNavIndex = [0, 1, 2, 3, -1, 4, 5, 6, 7];
 
 type VenueMode = "KOREA" | "THAILAND";
 
@@ -55,10 +60,10 @@ type VenueMode = "KOREA" | "THAILAND";
 function TransportSection() {
   return (
     <div className="space-y-4 pb-6">
-      <SubwaySection lang="ko" />
-      <BusSection lang="ko" />
-      <ParkingSection lang="ko" />
-      <ShareSection lang="ko" />
+      <SubwaySection lang="en" />
+      <BusSection lang="en" />
+      <ParkingSection lang="en" />
+      <ShareSection lang="en" />
     </div>
   );
 }
@@ -66,10 +71,10 @@ function TransportSection() {
 function GiftSection() {
   return (
     <div className="space-y-4">
-      <AccountSection lang="ko" />
+      <AccountSection lang="en" />
       <div className="mx-auto w-full max-w-[420px] overflow-hidden rounded-lg shadow-sm">
         <Image
-          src="/images/gallery/hori_1.JPG"
+          src="/images/hori_1.JPG"
           alt="wedding gallery horizontal"
           width={1200}
           height={800}
@@ -77,7 +82,6 @@ function GiftSection() {
           sizes="(max-width: 420px) 100vw, 420px"
         />
       </div>
-      <RSVPSection lang="ko" />
     </div>
   );
 }
@@ -85,95 +89,85 @@ function GiftSection() {
 /* ---------- main component ---------- */
 export default function WeddingInvitation() {
   const { isReady, progress } = useInvitationReady();
+  const [envelopeOpened, setEnvelopeOpened] = useState(false);
   const { isMuted, toggleMute } = useAudio(
-    "/songs/until-i-found-you.mp3",
-    isReady,
+    "/songs/Forever-and-Ever-and-Always.mp3",
+    envelopeOpened,
   );
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [showLangPopup, setShowLangPopup] = useState(false);
-  const [selectedVenue, setSelectedVenue] = useState<VenueMode>("KOREA");
+  const [selectedVenue, setSelectedVenue] = useState<VenueMode>("THAILAND");
+
+  // Thailand: 0-6 (Home→RSVP), Korea: all 8 (+ Transport)
   const visibleNavItems =
-    selectedVenue === "THAILAND" ? navItems.slice(0, 6) : navItems;
+    selectedVenue === "THAILAND" ? navItems.slice(0, 7) : navItems;
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = [
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
+    useRef<HTMLDivElement>(null), // 0 Cover
+    useRef<HTMLDivElement>(null), // 1 Invitation
+    useRef<HTMLDivElement>(null), // 2 WeddingInfo
+    useRef<HTMLDivElement>(null), // 3 Gallery
+    useRef<HTMLDivElement>(null), // 4 BehindScene
+    useRef<HTMLDivElement>(null), // 5 Gift
+    useRef<HTMLDivElement>(null), // 6 Location
+    useRef<HTMLDivElement>(null), // 7 RSVP
+    useRef<HTMLDivElement>(null), // 8 Transport (Korea)
   ];
-  const rsvpModal = useRsvpModalPrompt({
-    containerRef,
-    enabled: isReady,
-    lang: "ko",
-    triggerRef: sectionRefs[3],
-  });
+
+  // const rsvpModal = useRsvpModalPrompt({
+  //   containerRef,
+  //   enabled: isReady,
+  //   lang: "en",
+  //   triggerRef: sectionRefs[3],
+  // });
 
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     const savedLang = localStorage.getItem("lang");
-
-    // 🚨 prevent overriding manual navigation
-    if (!savedLang) return;
-
-    if (savedLang === "th" && pathname === "/") {
+    if ((!savedLang || savedLang === "th") && pathname === "/") {
       router.replace("/th");
     }
-  }, [pathname]);
-  
-  /* ---------- scroll to section ---------- */
-  const handleScrollTo = (index: number) => {
-    sectionRefs[index].current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+  }, [pathname, router]);
+
+  const handleScrollTo = (navIndex: number) => {
+    const sectionIndex = navScrollTargets[navIndex] ?? navIndex;
+    sectionRefs[sectionIndex].current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  /* ---------- detect active section ---------- */
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-
     const handleScroll = () => {
       const offsets = sectionRefs.map((ref) => {
         if (!ref.current) return Number.POSITIVE_INFINITY;
-        const rect = ref.current.getBoundingClientRect();
-        return Math.abs(rect.top);
+        return Math.abs(ref.current.getBoundingClientRect().top);
       });
-
-      const minIndex = offsets.indexOf(Math.min(...offsets));
-      setActiveIndex(minIndex);
+      const nearestSection = offsets.indexOf(Math.min(...offsets));
+      const navIdx = sectionToNavIndex[nearestSection];
+      if (navIdx >= 0) setActiveIndex(navIdx);
     };
-
     container.addEventListener("scroll", handleScroll);
-
-    return () => {
-      container.removeEventListener("scroll", handleScroll);
-    };
+    return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
-      <LoadingScreen lang="ko" progress={progress} isReady={isReady} />
-      <RsvpModal
-        lang="ko"
+      <LoadingScreen lang="en" progress={progress} isReady={isReady} />
+      <EnvelopeOverlay
+        lang="en"
+        isVisible={isReady && !envelopeOpened}
+        onOpen={() => setEnvelopeOpened(true)}
+      />
+      {/* <RsvpModal
+        lang="en"
         isOpen={rsvpModal.isOpen}
         doNotShowToday={rsvpModal.doNotShowToday}
         onDoNotShowTodayChange={rsvpModal.setDoNotShowToday}
         onClose={rsvpModal.closeModal}
-      />
-      <FlowerBackground />
-
-      {/* 🌸 LANGUAGE POPUP */}
-      {/* {showLangPopup && (
-        <LanguagePopup onClose={() => setShowLangPopup(false)} />
-      )} */}
+      /> */}
 
       <div className="w-full h-screen flex justify-center bg-[rgba(153,153,153,0.05)]">
         <div
@@ -185,55 +179,44 @@ export default function WeddingInvitation() {
             <CoverSection />
           </div>
 
-          {/* Other sections */}
           <div className="px-4 pt-4 pb-32 space-y-10">
             <div ref={sectionRefs[1]}>
-              <InvitationSection lang="ko" />
+              <InvitationSection lang="en" />
             </div>
 
             <div ref={sectionRefs[2]}>
-              <WeddingInfoSection
-                lang="ko"
-                selectedVenue={selectedVenue}
-                onSelectVenue={setSelectedVenue}
-              />
+              <WeddingInfoSection lang="en" selectedVenue={selectedVenue} onSelectVenue={setSelectedVenue} />
             </div>
 
             <div ref={sectionRefs[3]}>
-              <GallerySection lang="ko" />
+              <GallerySection lang="en" />
             </div>
 
             <div ref={sectionRefs[4]}>
-              <GiftSection />
-            </div>
-
-            <div className="-mt-7 mx-auto w-full max-w-[420px] overflow-hidden rounded-lg shadow-sm">
-              <Image
-                src="/images/gallery/hori_2.JPG"
-                alt="wedding gallery horizontal"
-                width={1200}
-                height={800}
-                className="h-auto w-full object-cover"
-                sizes="(max-width: 420px) 100vw, 420px"
-              />
+              <BehindSceneSection lang="en" />
             </div>
 
             <div ref={sectionRefs[5]}>
-              <LocationSection
-                lang="ko"
-                selectedVenue={selectedVenue}
-                onSelectVenue={setSelectedVenue}
-              />
+              <GiftSection />
+            </div>
+
+            <div ref={sectionRefs[6]}>
+              <LocationSection lang="en" selectedVenue={selectedVenue} onSelectVenue={setSelectedVenue} />
+            </div>
+
+            {/* RSVP — always at the bottom */}
+            <div ref={sectionRefs[7]}>
+              <RSVPSection lang="en" />
             </div>
 
             {selectedVenue !== "THAILAND" && (
-              <div ref={sectionRefs[6]}>
+              <div ref={sectionRefs[8]}>
                 <TransportSection />
               </div>
             )}
 
-            <footer className="typo-crayon-font pb-2 text-center text-[12px] text-gray-400">
-              © Copyright EVE&amp;NUN
+            <footer className="pb-2 text-center text-[12px] text-gray-400">
+              © Copyright Mochung Lab 2026. All rights reserved.
             </footer>
           </div>
 
@@ -247,12 +230,7 @@ export default function WeddingInvitation() {
             </button>
           </div>
 
-          {/* bottom nav */}
-          <BottomNav
-            navItems={visibleNavItems}
-            activeIndex={activeIndex}
-            onClick={handleScrollTo}
-          />
+          <BottomNav navItems={visibleNavItems} activeIndex={activeIndex} onClick={handleScrollTo} />
         </div>
       </div>
     </>

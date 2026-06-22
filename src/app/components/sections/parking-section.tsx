@@ -1,17 +1,17 @@
 "use client";
 
 type Props = {
-  lang: "ko" | "th";
+  lang: "en" | "th";
 };
 
 export default function ParkingSection({ lang }: Props) {
   const isTH = lang === "th";
 
-  const fontClass = isTH ? "pg-bathbomb" : "typo-crayon-font";
-  const sectionSize = isTH ? "text-[20px]" : "text-[13px]";
-  const titleSize = isTH ? "text-[22px]" : "text-[16px]";
-  const highlightSize = isTH ? "text-[24px]" : "text-[18px]";
-  const subTextSize = isTH ? "text-[18px]" : "text-[14px]";
+  const fontClass = "typo-crayon-font";
+  const sectionSize = "text-[13px]";
+  const titleSize = "text-[16px]";
+  const highlightSize = "text-[18px]";
+  const subTextSize = "text-[14px]";
 
   return (
     <div
@@ -21,19 +21,19 @@ export default function ParkingSection({ lang }: Props) {
       <p className={`title-en ${fontClass} ${titleSize}`}>PARKING</p>
 
       <h3 className={`highlight ${fontClass} ${highlightSize}`}>
-        {lang === "ko" ? "주차안내" : "ที่จอดรถ"}
+        {lang === "en" ? "Parking" : "ที่จอดรถ"}
       </h3>
 
       <p className={`${subTextSize}`}>
-        {lang === "ko"
-          ? '네비게이션 : "JK아트컨벤션" 또는 "문래동 SK리더스뷰" 입력'
-          : 'นำทาง : ค้นหา "JK Art Convention" หรือ "SK Leaders View Mullae"'}
+        {lang === "en"
+          ? 'Navigation: search for "Vivace Bangpu"'
+          : 'นำทาง : ค้นหา "วิวาเช่ บางปู" หรือ "Vivace Bangpu"'}
       </p>
 
       <p className={`${subTextSize}`}>
-        {lang === "ko"
-          ? "동시 1,000여대 주차 가능, 주차요원의 안내를 받으세요."
-          : "สามารถจอดรถได้ประมาณ 1,000 คัน กรุณาไปตามที่เจ้าหน้าที่แนะนำ"}
+        {lang === "en"
+          ? "Please follow venue staff guidance for parking."
+          : "กรุณาจอดรถตามคำแนะนำของเจ้าหน้าที่สถานที่"}
       </p>
     </div>
   );

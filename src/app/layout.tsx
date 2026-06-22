@@ -2,21 +2,21 @@ import "./globals.css";
 import { ReactNode } from "react";
 
 export const metadata = {
-  title: "EVE&NUN 결혼합니다!",
+  title: "EVE&NUN Wedding Invitation",
   description:
-    "2026년 09월 13일 일요일 오후 2시, JK아트컨벤션 4층 엠버루체홀 만나요.",
+    "Saturday, December 19, 2026 at Vivace Bangpu.",
   openGraph: {
-    title: "EVE&NUN 결혼합니다!",
+    title: "EVE&NUN Wedding Invitation",
     description:
-      "2026년 09월 13일 일요일 오후 2시, JK아트컨벤션 4층 엠버루체홀 만나요.",
+      "Saturday, December 19, 2026 at Vivace Bangpu.",
     url: "https://eve-nun.vercel.app/",
-    siteName: "EVE&NUN 모바일 청첩장",
+    siteName: "EVE&NUN Wedding Invitation",
     images: [
       {
-        url: "https://eve-nun.vercel.app/images/gallery/studio/1.JPG",
+        url: "https://eve-nun.vercel.app/images/bg_updated_1.webp",
         width: 800,
         height: 600,
-        alt: "EVE&NUN 웨딩 사진",
+        alt: "EVE&NUN wedding photo",
       },
     ],
     type: "website",
@@ -25,17 +25,18 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="en">
       <head>
-        <link rel="shortcut icon" href="/images/icon/flowers.png" />
-        <meta property="og:title" content="EVE&NUN 결혼합니다!" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.svg" />
+        <meta property="og:title" content="EVE&NUN Wedding Invitation" />
         <meta
           property="og:description"
-          content="2026년 09월 13일 일요일 오후 2시, JK아트컨벤션 4층 엠버루체홀 만나요."
+          content="Saturday, December 19, 2026 at Vivace Bangpu."
         />
         <meta
           property="og:image"
-          content="https://eve-nun.vercel.app/images/gallery/studio/1.JPG"
+          content="https://eve-nun.vercel.app/images/bg_updated_1.webp"
         />
         <meta property="og:url" content="https://eve-nun.vercel.app/" />
         <meta property="og:type" content="website" />

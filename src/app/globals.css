@@ -53,6 +53,14 @@
 }
 
 @font-face {
+  font-family: "NotoSansThai";
+  src: url("/font/NotoSansThai.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "IBMPlexSansKR";
   src: url("/font/IBMPlexSansKR-Regular.ttf") format("truetype");
   font-weight: normal;
@@ -95,26 +103,24 @@
 /* ④ Default font stack for body & buttons */
 button,
 body {
-  font-family:
-    "NEXON Lv1 Gothic", "League Spartan", Arial, sans-serif,
-    "BrittanySignature", "BODAR", "IBMPlexSansKR", "TypoCrayon";
+  font-family: "NotoSansThai", Arial, sans-serif;
 }
 
 /* ⑤ Class-based usage */
 .nexon-font {
-  font-family: "NEXON Lv1 Gothic", sans-serif;
+  font-family: "NotoSansThai", Arial, sans-serif;
 }
 
 .league-font {
-  font-family: "League Spartan", sans-serif;
+  font-family: "NotoSansThai", Arial, sans-serif;
 }
 
 .didot-font {
-  font-family: "GFS Didot", serif;
+  font-family: "NotoSansThai", Arial, sans-serif;
 }
 
 .brittany-font {
-  font-family: "BrittanySignature", serif;
+  font-family: "NotoSansThai", Arial, sans-serif;
 }
 
 .bodar-font {
@@ -122,23 +128,23 @@ body {
 }
 
 .ibmplex-font {
-  font-family: "IBMPlexSansKR", serif;
+  font-family: "NotoSansThai", Arial, sans-serif;
 }
 
 .crayon-font {
-  font-family: "CrayonCrumble", serif;
+  font-family: "NotoSansThai", Arial, sans-serif;
 }
 
 .typo-crayon-font {
-  font-family: "TypoCrayon", serif;
+  font-family: "NotoSansThai", Arial, sans-serif;
 }
 
 .pg-bathbomb {
-  font-family: "PG_Bathbomb", serif;
+  font-family: "NotoSansThai", Arial, sans-serif;
 }
 
 .pg-crayon {
-  font-family: "PG_Crayon", serif;
+  font-family: "NotoSansThai", Arial, sans-serif;
 }
 
 /* General styling */
@@ -219,9 +225,10 @@ a {
 .profile-photo-frame {
   position: relative;
   overflow: hidden;
-  border-radius: 9999px;
+  border-radius: 8px;
   flex-shrink: 0;
   perspective: 800px;
+  box-shadow: 0 10px 24px rgba(54, 42, 42, 0.12);
 }
 
 .profile-photo-flip {
@@ -255,7 +262,7 @@ a {
     @apply font-medium;
   }
   .highlight {
-    @apply typo-crayon-font text-[#8DBEE1] font-bold;
+    @apply typo-crayon-font text-[#7a4f35] font-bold;
   }
 }
 

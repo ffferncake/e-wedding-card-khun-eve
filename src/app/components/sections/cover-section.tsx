@@ -11,38 +11,30 @@ export default function CoverSection() {
         className="absolute inset-0 object-cover"
       />
 
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-white/28 via-white/4 to-white/10" />
-      <div className="absolute inset-x-0 top-0 z-10 h-[33%]" />
-      <div className="absolute inset-x-0 bottom-0 z-10 h-[34%] bg-gradient-to-t from-white/74 via-white/22 to-white/0" />
+      <div className="absolute inset-0 z-10 bg-black/16" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/18 via-transparent to-black/20" />
 
-      <div className="pg-bathbomb absolute inset-x-0 top-[6.5%] z-20 flex items-baseline justify-between gap-3 px-5 text-[15px] uppercase leading-none tracking-[0.2em] text-black/72 drop-shadow-[0_1px_10px_rgba(255,255,255,0.95)]">
-        <p
-          className="shrink-0 whitespace-nowrap text-left opacity-0 animate-fadeIn"
-          style={{ animationDelay: "0.2s" }}
+      <div className="absolute left-1/2 top-[5.8%] z-20 w-full max-w-[420px] -translate-x-1/2 px-5">
+        <div
+          className="relative bodar-font select-none text-left text-[122px] font-normal uppercase leading-[0.73] text-white opacity-0 drop-shadow-[0_2px_14px_rgba(0,0,0,0.26)] animate-fadeIn sm:text-[138px]"
+          style={{ animationDelay: "0.25s" }}
         >
-          2026.09.13 (2 PM)
-        </p>
-        <p
-          className="shrink-0 whitespace-nowrap text-right opacity-0 animate-fadeIn"
-          style={{ animationDelay: "0.2s" }}
-        >
-          JK Art Convention
-        </p>
-      </div>
-
-      <div className="absolute left-1/2 top-[15%] z-20 w-full -translate-x-1/2 -translate-y-1/2 px-3 text-center">
-        <h1
-          className="font-[BODAR] text-[74px] font-normal uppercase leading-none tracking-[0.018em] text-black/90 opacity-0 drop-shadow-[0_2px_18px_rgba(255,255,255,0.88)] animate-fadeIn sm:text-[86px]"
-          style={{ animationDelay: "0.35s" }}
-        >
-          WEDDING
-        </h1>
+          {/* & watermark behind names */}
+          <span
+            className="bodar-font absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none"
+            style={{ fontSize: "clamp(180px, 45vw, 220px)", opacity: 0.32, lineHeight: 1, color: "#c8a27b" }}
+          >
+            &amp;
+          </span>
+          <p className="relative leading-[0.73]">EVE</p>
+          <p className="relative ml-[100px] leading-[0.73]">NUN</p>
+        </div>
 
         <p
-          className="pg-bathbomb mx-auto -mt-3 max-w-[260px] text-[17px] leading-none tracking-[0.08em] text-black/74 opacity-0 drop-shadow-[0_1px_10px_rgba(255,255,255,0.95)] animate-fadeIn"
-          style={{ animationDelay: "0.55s" }}
+          className="bodar-font mt-4 text-center text-[20px] font-light leading-none text-white opacity-0 drop-shadow-[0_2px_10px_rgba(0,0,0,0.32)] animate-fadeIn"
+          style={{ animationDelay: "0.5s" }}
         >
-          EVE&amp;NUN
+          19.12.2026
         </p>
       </div>
     </section>

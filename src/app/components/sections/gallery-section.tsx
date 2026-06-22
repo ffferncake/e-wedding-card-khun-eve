@@ -13,36 +13,18 @@ import {
 import { galleryImages } from "../../data/gallery";
 
 type Props = {
-  lang: "ko" | "th";
+  lang: "en" | "th";
 };
-
-type GalleryTab = "winter" | "summer" | "studio";
 
 export default function GallerySection({ lang }: Props) {
   const isTH = lang === "th";
 
-  const fontClass = isTH ? "pg-bathbomb" : "typo-crayon-font";
-  const sectionSize = isTH ? "text-[20px]" : "text-[13px]";
-  const titleSize = isTH ? "text-[22px]" : "text-[16px]";
-  const highlightSize = isTH ? "text-[24px]" : "text-[18px]";
-  const subTextSize = isTH ? "text-[18px]" : "text-[14px]";
+  const fontClass = "typo-crayon-font";
+  const sectionSize = "text-[13px]";
+  const titleSize = "text-[16px]";
+  const highlightSize = "text-[18px]";
+  const subTextSize = "text-[14px]";
 
-  const tabs = [
-    {
-      key: "studio",
-      label: lang === "ko" ? "스튜디오" : "สตูดิโอ",
-    },
-    {
-      key: "summer",
-      label: lang === "ko" ? "여름" : "summer set",
-    },
-    {
-      key: "winter",
-      label: lang === "ko" ? "겨울" : "winter set",
-    },
-  ] as const;
-
-  const [tab, setTab] = useState<GalleryTab>("studio");
   const [viewMode, setViewMode] = useState<"single" | "grid">("grid");
   const [startIndex, setStartIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -51,18 +33,13 @@ export default function GallerySection({ lang }: Props) {
   const loadedImagesRef = useRef<Set<string>>(new Set());
 
   const pageSize = viewMode === "single" ? 1 : 4;
-  const images: readonly string[] = galleryImages[tab];
+  const images: readonly string[] = Object.values(galleryImages).flat();
   const lastPageStart = Math.floor((images.length - 1) / pageSize) * pageSize;
   const currentImages = images.slice(startIndex, startIndex + pageSize);
   const pageKey = currentImages.join("|");
   const visibleEnd = Math.min(startIndex + currentImages.length, images.length);
   const lightboxImage =
     lightboxIndex === null ? null : images[lightboxIndex] ?? null;
-
-  useEffect(() => {
-    setStartIndex(0);
-    setImageLoading(true);
-  }, [tab]);
 
   useEffect(() => {
     const allLoaded = currentImages.every((img) =>
@@ -183,34 +160,8 @@ export default function GallerySection({ lang }: Props) {
       <div id="gallery" className={`section ${fontClass} ${sectionSize}`}>
         <p className={`title-en ${fontClass} ${titleSize}`}>GALLERY</p>
         <h3 className={`highlight ${fontClass} ${highlightSize}`}>
-          {lang === "ko" ? "웨딩 갤러리" : "แกลเลอรี่"}
+          {lang === "en" ? "Wedding Gallery" : "แกลเลอรี่"}
         </h3>
-      </div>
-
-      <div className="w-full max-w-[420px] mx-auto mt-2">
-        <div className="relative flex border-b border-gray-200">
-          {tabs.map((t) => (
-            <button
-              key={t.key}
-              onClick={() => setTab(t.key)}
-              className={`flex-1 py-2 font-medium transition ${fontClass} ${subTextSize} ${
-                tab === t.key
-                  ? "text-[#004483]"
-                  : "text-gray-400 hover:text-gray-600"
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
-
-          <div
-            className={`absolute bottom-0 h-[2px] bg-[#004483] transition-all duration-300 ${fontClass} ${subTextSize}`}
-            style={{
-              width: `${100 / tabs.length}%`,
-              left: `${tabs.findIndex((t) => t.key === tab) * (100 / tabs.length)}%`,
-            }}
-          />
-        </div>
       </div>
 
       <div className="mx-auto mt-3 flex w-full max-w-[420px] justify-center">
@@ -218,11 +169,11 @@ export default function GallerySection({ lang }: Props) {
           <button
             type="button"
             onClick={() => changeViewMode("single")}
-            title={lang === "ko" ? "한 장씩 보기" : "ดูทีละรูป"}
-            aria-label={lang === "ko" ? "한 장씩 보기" : "ดูทีละรูป"}
+            title={lang === "en" ? "View one photo" : "ดูทีละรูป"}
+            aria-label={lang === "en" ? "View one photo" : "ดูทีละรูป"}
             className={`flex h-8 min-w-12 items-center justify-center gap-1 rounded-full px-3 transition ${
               viewMode === "single"
-                ? "bg-[#004483] text-white shadow"
+                ? "bg-[#7a4f35] text-white shadow"
                 : "text-gray-400"
             }`}
           >
@@ -233,11 +184,11 @@ export default function GallerySection({ lang }: Props) {
           <button
             type="button"
             onClick={() => changeViewMode("grid")}
-            title={lang === "ko" ? "네 장씩 보기" : "ดูทีละ 4 รูป"}
-            aria-label={lang === "ko" ? "네 장씩 보기" : "ดูทีละ 4 รูป"}
+            title={lang === "en" ? "View four photos" : "ดูทีละ 4 รูป"}
+            aria-label={lang === "en" ? "View four photos" : "ดูทีละ 4 รูป"}
             className={`flex h-8 min-w-12 items-center justify-center gap-1 rounded-full px-3 transition ${
               viewMode === "grid"
-                ? "bg-[#004483] text-white shadow"
+                ? "bg-[#7a4f35] text-white shadow"
                 : "text-gray-400"
             }`}
           >
@@ -257,7 +208,7 @@ export default function GallerySection({ lang }: Props) {
         >
           {imageLoading && (
             <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/45 backdrop-blur-[1px]">
-              <Loader2 className="h-8 w-8 animate-spin text-[#004483]" />
+              <Loader2 className="h-8 w-8 animate-spin text-[#7a4f35]" />
             </div>
           )}
 
@@ -267,7 +218,7 @@ export default function GallerySection({ lang }: Props) {
               key={image}
               onClick={() => openLightbox(startIndex + imageIndex)}
               aria-label={
-                lang === "ko" ? "갤러리 사진 크게 보기" : "ดูรูปภาพขนาดใหญ่"
+                lang === "en" ? "Open gallery photo" : "ดูรูปภาพขนาดใหญ่"
               }
               className={`relative aspect-[3/4] overflow-hidden bg-white ${
                 viewMode === "single" ? "rounded-xl" : "rounded-lg"
@@ -275,7 +226,7 @@ export default function GallerySection({ lang }: Props) {
             >
               <Image
                 src={image}
-                alt={`${tab}-${startIndex + imageIndex}`}
+                alt={`gallery-${startIndex + imageIndex}`}
                 fill
                 quality={70}
                 sizes="(max-width: 420px) 100vw, 420px"
@@ -295,7 +246,7 @@ export default function GallerySection({ lang }: Props) {
             <div
               className={`flex min-h-[320px] items-center justify-center text-gray-400 ${fontClass} ${subTextSize}`}
             >
-              {lang === "ko" ? "갤러리 로딩 중..." : "กำลังโหลดแกลเลอรี่..."}
+              {lang === "en" ? "Loading gallery..." : "กำลังโหลดแกลเลอรี่..."}
             </div>
           )}
         </div>
@@ -334,12 +285,12 @@ export default function GallerySection({ lang }: Props) {
           className="fixed inset-0 z-[1001] flex items-center justify-center bg-black/90"
           role="dialog"
           aria-modal="true"
-          aria-label={lang === "ko" ? "갤러리 사진 보기" : "ดูรูปภาพแกลเลอรี่"}
+          aria-label={lang === "en" ? "View gallery photo" : "ดูรูปภาพแกลเลอรี่"}
         >
           <button
             type="button"
             onClick={closeLightbox}
-            aria-label={lang === "ko" ? "닫기" : "ปิด"}
+            aria-label={lang === "en" ? "Close" : "ปิด"}
             className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/25"
           >
             <X size={24} />
@@ -350,7 +301,7 @@ export default function GallerySection({ lang }: Props) {
               <button
                 type="button"
                 onClick={showPrevImage}
-                aria-label={lang === "ko" ? "이전 사진" : "รูปก่อนหน้า"}
+                aria-label={lang === "en" ? "Previous photo" : "รูปก่อนหน้า"}
                 className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/25"
               >
                 <ChevronLeft size={30} />
@@ -359,7 +310,7 @@ export default function GallerySection({ lang }: Props) {
               <button
                 type="button"
                 onClick={showNextImage}
-                aria-label={lang === "ko" ? "다음 사진" : "รูปถัดไป"}
+                aria-label={lang === "en" ? "Next photo" : "รูปถัดไป"}
                 className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/25"
               >
                 <ChevronRight size={30} />
@@ -370,7 +321,7 @@ export default function GallerySection({ lang }: Props) {
           <div className="relative h-[100dvh] w-screen max-w-[420px]">
             <Image
               src={lightboxImage}
-              alt={`${tab}-${lightboxIndex + 1}`}
+              alt={`gallery-${lightboxIndex + 1}`}
               fill
               quality={85}
               sizes="100vw"

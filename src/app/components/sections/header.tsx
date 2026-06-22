@@ -79,7 +79,7 @@ export default function Header({
                 scrollTo("#message");
               }}
             >
-              초대글
+              Invitation
             </a>
 
             <a
@@ -90,7 +90,7 @@ export default function Header({
                 scrollTo("#weddinginfo");
               }}
             >
-              예식안내
+              Details
             </a>
 
             <a
@@ -101,7 +101,7 @@ export default function Header({
                 scrollTo("#accountnumber");
               }}
             >
-              마음 전하실 곳
+              Gift
             </a>
 
             <a
@@ -112,7 +112,7 @@ export default function Header({
                 scrollTo("#location");
               }}
             >
-              오시는길
+              Location
             </a>
 
             <a
@@ -123,7 +123,7 @@ export default function Header({
                 scrollTo("#gallery");
               }}
             >
-              웨딩 갤러리
+              Gallery
             </a>
           </div>
         </div>

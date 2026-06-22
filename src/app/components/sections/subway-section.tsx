@@ -3,17 +3,17 @@
 import Image from "next/image";
 
 type Props = {
-  lang: "ko" | "th";
+  lang: "en" | "th";
 };
 
 export default function SubwaySection({ lang }: Props) {
  const isTH = lang === "th";
 
-  const fontClass = isTH ? "pg-bathbomb" : "typo-crayon-font";
-  const sectionSize = isTH ? "text-[20px]" : "text-[13px]";
-  const titleSize = isTH ? "text-[22px]" : "text-[16px]";
-  const highlightSize = isTH ? "text-[24px]" : "text-[18px]";
-  const subTextSize = isTH ? "text-[18px]" : "text-[14px]";
+  const fontClass = "typo-crayon-font";
+  const sectionSize = "text-[13px]";
+  const titleSize = "text-[16px]";
+  const highlightSize = "text-[18px]";
+  const subTextSize = "text-[14px]";
 
 
   return (
@@ -21,7 +21,7 @@ export default function SubwaySection({ lang }: Props) {
       <p className={`title-en ${fontClass} ${titleSize}`}>SUBWAY</p>
 
       <h3 className={`highlight ${fontClass} ${highlightSize}`}>
-        {lang === "ko" ? "지하철 이용시" : "การเดินทางด้วยรถไฟฟ้า"}
+        {lang === "en" ? "By Subway" : "การเดินทางด้วยรถไฟฟ้า"}
       </h3>
 
       <div className={`flex flex-row justify-center gap-5 ${titleSize}`}>
@@ -32,19 +32,19 @@ export default function SubwaySection({ lang }: Props) {
             width={19}
             height={19}
           />
-          <p>{lang === "ko" ? "2호선 문래역" : "รถไฟฟ้าสาย 2 สถานี Mullae"}</p>
+          <p>{lang === "en" ? "Line 2 Mullae Station" : "รถไฟฟ้าสาย 2 สถานี Mullae"}</p>
         </div>
       </div>
 
       <p className={`mt-2 ${subTextSize}`}>
-        {lang === "ko"
-          ? "셔틀버스 : 4번출구(뒷쪽) 셔틀버스 운행"
+        {lang === "en"
+          ? "Shuttle bus: available behind Exit 4"
           : "รถรับส่ง : ออกทางออก 4 (ด้านหลัง) มีรถรับส่ง"}
       </p>
 
       <p className={`mt-2 ${subTextSize}`}>
-        {lang === "ko"
-          ? "도보이용 : 5번출구에서 전방 직진 300M"
+        {lang === "en"
+          ? "On foot: walk straight 300 m from Exit 5"
           : "เดินเท้า : ออกทางออก 5 เดินตรงประมาณ 300 เมตร"}
       </p>
     </div>
