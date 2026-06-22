@@ -161,15 +161,6 @@ export default function LocationSection({
 
         </div>
 
-        {/* Footer tip */}
-        <div className="flex items-start gap-2 border-t border-[#e8d5bf] bg-[#f7efe6] px-4 py-2.5">
-          <span className="text-[14px]">💡</span>
-          <p className={`text-[11px] text-[#8a6a5a] leading-relaxed ${fontClass}`}>
-            {lang === "en"
-              ? "Tip: Book Grab in advance. Parking is available at the venue."
-              : "แนะนำจอง Grab ล่วงหน้า มีที่จอดรถบริเวณสถานที่จัดงาน"}
-          </p>
-        </div>
       </div>
 
     </div>
