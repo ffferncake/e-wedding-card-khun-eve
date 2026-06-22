@@ -18,7 +18,7 @@ export default function AccountSection({
 }) {
   const accounts: Account[] = [
     {
-      bank: lang === "en" ? "SCB (Thai Commercial Bank)" : "ไทยพาณิชย์ (SCB)",
+      bank: lang === "en" ? "SCB" : "ไทยพาณิชย์ (SCB)",
       bankIcon: "/images/scb_logo.svg",
       number: "163-221986-9",
       role: lang === "en" ? "👰🏻‍♀️ Bride" : "👰🏻‍♀️ เจ้าสาว",
@@ -90,7 +90,7 @@ export default function AccountSection({
                 <span
                   className={`${subTextSize} font-medium text-[#333] ${fontClass}`}
                 >
-                  {acc.bank} {acc.number}
+                  {acc.number}
                 </span>
               </div>
 
