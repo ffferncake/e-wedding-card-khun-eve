@@ -122,7 +122,7 @@ export default function InvitationSection({ lang }: Props) {
           <span className="font-semibold">{isTH ? "แม่ศรีนวล" : "Mrs. Srinuan"}</span>
         </p>
         <p className={`text-[12px] text-[#8a6a5a]`}>
-          ({isTH ? "พ่อชาติ · แม่นวล" : "Dad Chat · Mom Nuan"})
+          ({isTH ? "พ่อชาติ · แม่นวล" : "Dad Chart · Mom Nuan"})
         </p>
         <p className={`${subTextSize} mt-1`}>
           👰 {isTH ? "บุตรสาวของ" : "Daughter of"}{" "}
