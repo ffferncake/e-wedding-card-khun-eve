@@ -35,6 +35,12 @@ export default function ParkingSection({ lang }: Props) {
           ? "Please follow venue staff guidance for parking."
           : "กรุณาจอดรถตามคำแนะนำของเจ้าหน้าที่สถานที่"}
       </p>
+
+      <p className={`${subTextSize}`}>
+        {lang === "en"
+          ? "The venue can accommodate approximately 200–300 cars."
+          : "สถานที่สามารถรองรับรถยนต์ได้ประมาณ 200–300 คัน"}
+      </p>
     </div>
   );
 }

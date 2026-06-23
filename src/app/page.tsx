@@ -12,10 +12,6 @@ import GallerySection from "./components/sections/gallery-section";
 import BehindSceneSection from "./components/sections/behind-scene-section";
 import AccountSection from "./components/sections/account-section";
 import LocationSection from "./components/sections/location-section";
-import SubwaySection from "./components/sections/subway-section";
-import BusSection from "./components/sections/bus-section";
-import ParkingSection from "./components/sections/parking-section";
-import ShareSection from "./components/sections/share-section";
 import RSVPSection from "./components/sections/rspv-section";
 import { useAudio } from "./hooks/useAudio";
 
@@ -26,7 +22,6 @@ import {
   Image as ImageIcon,
   Gift,
   MapPin,
-  Bus,
   Music4,
   VolumeOff,
   ClipboardList,
@@ -46,27 +41,14 @@ const navItems = [
   { icon: Gift, label: "Gift" },
   { icon: MapPin, label: "Location" },
   { icon: ClipboardList, label: "RSVP" },
-  { icon: Bus, label: "Transport" },
 ];
 
 // Maps nav index → sectionRefs index (Behind section is ref[4] but not in nav)
-const navScrollTargets = [0, 1, 2, 3, 5, 6, 7, 8];
+const navScrollTargets = [0, 1, 2, 3, 5, 6, 7];
 // Maps sectionRefs index → nav index (-1 = not in nav)
-const sectionToNavIndex = [0, 1, 2, 3, -1, 4, 5, 6, 7];
+const sectionToNavIndex = [0, 1, 2, 3, -1, 4, 5, 6];
 
 type VenueMode = "KOREA" | "THAILAND";
-
-/* ---------- combined sections ---------- */
-function TransportSection() {
-  return (
-    <div className="space-y-4 pb-6">
-      <SubwaySection lang="en" />
-      <BusSection lang="en" />
-      <ParkingSection lang="en" />
-      <ShareSection lang="en" />
-    </div>
-  );
-}
 
 function GiftSection() {
   return (
@@ -98,9 +80,7 @@ export default function WeddingInvitation() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedVenue, setSelectedVenue] = useState<VenueMode>("THAILAND");
 
-  // Thailand: 0-6 (Home→RSVP), Korea: all 8 (+ Transport)
-  const visibleNavItems =
-    selectedVenue === "THAILAND" ? navItems.slice(0, 7) : navItems;
+  const visibleNavItems = navItems;
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = [
@@ -112,7 +92,6 @@ export default function WeddingInvitation() {
     useRef<HTMLDivElement>(null), // 5 Gift
     useRef<HTMLDivElement>(null), // 6 Location
     useRef<HTMLDivElement>(null), // 7 RSVP
-    useRef<HTMLDivElement>(null), // 8 Transport (Korea)
   ];
 
   const rsvpModal = useRsvpModalPrompt({
@@ -200,12 +179,6 @@ export default function WeddingInvitation() {
             <div ref={sectionRefs[7]}>
               <RSVPSection lang="en" />
             </div>
-
-            {selectedVenue !== "THAILAND" && (
-              <div ref={sectionRefs[8]}>
-                <TransportSection />
-              </div>
-            )}
 
             <footer className="pb-2 text-center text-[12px] text-gray-400">
               © Copyright Mochung Lab 2026. All rights reserved.

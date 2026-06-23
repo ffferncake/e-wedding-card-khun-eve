@@ -13,9 +13,7 @@ type Props = {
 
 type VenueMode = "KOREA" | "THAILAND";
 
-export default function LocationSection({
-  lang,
-}: Props) {
+export default function LocationSection({ lang }: Props) {
   const isTH = lang === "th";
 
   const fontClass = "typo-crayon-font";
@@ -68,19 +66,31 @@ export default function LocationSection({
         </a>
       </div>
 
+      <div className="mt-5 text-center">
+        <p className={`title-en ${fontClass} ${titleSize}`}>PARKING</p>
+        <p className={subTextSize}>
+          {lang === "en"
+            ? "Parking available for 200–300 cars."
+            : "สถานที่สามารถรองรับรถยนต์ได้ประมาณ 200–300 คัน"}
+        </p>
+      </div>
+
       {/* ── BTS Transportation Card ── */}
-      <div className={`mt-5 rounded-xl border border-[#d9bfa8] bg-[#fdfaf6] overflow-hidden shadow-sm ${fontClass}`}>
+      <div
+        className={`mt-5 rounded-xl border border-[#d9bfa8] bg-[#fdfaf6] overflow-hidden shadow-sm ${fontClass}`}
+      >
         {/* Card header */}
         <div className="flex items-center gap-2.5 bg-[#f2e4d5] px-4 py-3 border-b border-[#d9bfa8]">
           <TrainFront size={16} className="text-[#7a4f35]" />
-          <p className={`text-[13px] font-semibold text-[#5a3527] text-left ${fontClass}`}>
+          <p
+            className={`text-[13px] font-semibold text-[#5a3527] text-left ${fontClass}`}
+          >
             {lang === "en" ? "Getting there by BTS" : "การเดินทางโดย BTS"}
           </p>
         </div>
 
         {/* Steps */}
         <div className="px-4 py-4 flex flex-col gap-0">
-
           {/* Step 1 */}
           <div className="flex items-start gap-3">
             <div className="flex flex-col items-center">
@@ -90,7 +100,10 @@ export default function LocationSection({
               >
                 1
               </div>
-              <div className="mt-1 w-px flex-1 bg-[#d9bfa8]" style={{ minHeight: 28 }} />
+              <div
+                className="mt-1 w-px flex-1 bg-[#d9bfa8]"
+                style={{ minHeight: 28 }}
+              />
             </div>
             <div className="pb-5 pt-0.5">
               <div className="flex items-center gap-1.5 flex-wrap">
@@ -100,11 +113,17 @@ export default function LocationSection({
                 >
                   BTS {lang === "en" ? "Green Line" : "สายสีเขียว"}
                 </span>
-                <span className={`text-[12px] text-[#5a3527] font-medium ${fontClass}`}>
-                  {lang === "en" ? "Sukhumvit / Bearing direction" : "สาย Sukhumvit / ทิศทาง Bearing"}
+                <span
+                  className={`text-[12px] text-[#5a3527] font-medium ${fontClass}`}
+                >
+                  {lang === "en"
+                    ? "Sukhumvit / Bearing direction"
+                    : "สาย Sukhumvit / ทิศทาง Bearing"}
                 </span>
               </div>
-              <p className={`mt-1 text-[12px] text-[#8a6a5a] leading-relaxed ${fontClass}`}>
+              <p
+                className={`mt-1 text-[12px] text-[#8a6a5a] leading-relaxed ${fontClass}`}
+              >
                 {lang === "en"
                   ? "Take BTS Green Line toward the Keha (Samut Prakan) end"
                   : "นั่งรถไฟฟ้า BTS สายสีเขียวมุ่งหน้าสายใต้ไปสุดสาย"}
@@ -121,19 +140,30 @@ export default function LocationSection({
               >
                 2
               </div>
-              <div className="mt-1 w-px flex-1 bg-[#d9bfa8]" style={{ minHeight: 28 }} />
+              <div
+                className="mt-1 w-px flex-1 bg-[#d9bfa8]"
+                style={{ minHeight: 28 }}
+              />
             </div>
             <div className="pb-5 pt-0.5">
-              <p className={`text-[13px] font-semibold text-[#5a3527] text-left ${fontClass}`}>
+              <p
+                className={`text-[13px] font-semibold text-[#5a3527] text-left ${fontClass}`}
+              >
                 {lang === "en" ? "Alight at Keha Station" : "ลงสถานีเคหะฯ"}
               </p>
               <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-lg border border-[#d9bfa8] bg-[#f7efe6] px-2.5 py-1">
-                <span className={`text-[11px] text-[#7a4f35] font-semibold ${fontClass}`}>
+                <span
+                  className={`text-[11px] text-[#7a4f35] font-semibold ${fontClass}`}
+                >
                   {lang === "en" ? "Exit 3" : "ทางออก 3"}
                 </span>
                 <span className="text-[10px] text-[#a28a75]">•</span>
-                <span className={`text-[11px] text-[#8a6a5a] text-left ${fontClass}`}>
-                  {lang === "en" ? "Keha Station (สถานีเคหะฯ)" : "BTS สถานีเคหะฯ"}
+                <span
+                  className={`text-[11px] text-[#8a6a5a] text-left ${fontClass}`}
+                >
+                  {lang === "en"
+                    ? "Keha Station (สถานีเคหะฯ)"
+                    : "BTS สถานีเคหะฯ"}
                 </span>
               </div>
             </div>
@@ -148,21 +178,24 @@ export default function LocationSection({
               3
             </div>
             <div className="pt-0.5">
-              <p className={`text-[13px] font-semibold text-[#5a3527] text-left ${fontClass}`}>
-                {lang === "en" ? "Continue ~5 km to the venue" : "ต่อรถไปอีกประมาณ 5 กม."}
+              <p
+                className={`text-[13px] font-semibold text-[#5a3527] text-left ${fontClass}`}
+              >
+                {lang === "en"
+                  ? "Continue ~5 km to the venue"
+                  : "ต่อรถไปอีกประมาณ 5 กม."}
               </p>
-              <p className={`mt-1 text-[12px] text-[#8a6a5a] leading-relaxed ${fontClass}`}>
+              <p
+                className={`mt-1 text-[12px] text-[#8a6a5a] leading-relaxed ${fontClass}`}
+              >
                 {lang === "en"
                   ? "Take a taxi, Grab, or local transport from Exit 3 — approx. 5 km to Vivace Bangpu"
                   : "นั่งแท็กซี่ หรือ Grab จากทางออก 3 ไปยังวิวาเช่ บางปู ระยะทางประมาณ 5 กิโลเมตร"}
               </p>
             </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
   );
 }
